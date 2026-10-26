@@ -1,4 +1,10 @@
-import { COMPONENTS, COMP_BY_ID, isAvailable, type CompId, type GroupKey } from '../../data/cabinet/components.ts';
+import {
+  COMPONENTS,
+  COMP_BY_ID,
+  isAvailable,
+  type CompId,
+  type GroupKey,
+} from '../../data/cabinet/components.ts';
 import type { ConfigKey } from '../../data/node.ts';
 import { R, plain, useI18n } from '../../i18n/index.ts';
 import { useCabText } from './text.ts';

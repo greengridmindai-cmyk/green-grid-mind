@@ -29,7 +29,12 @@ export const legalDe: LegalDict = {
     sections: [
       {
         h: 'Angaben gemäß § 5 DDG',
-        p: ['TODO: Firmenname und Rechtsform', 'TODO: Straße und Hausnummer', 'TODO: PLZ und Ort', 'Deutschland'],
+        p: [
+          'TODO: Firmenname und Rechtsform',
+          'TODO: Straße und Hausnummer',
+          'TODO: PLZ und Ort',
+          'Deutschland',
+        ],
       },
       { h: 'Vertreten durch', p: ['TODO: Name der vertretungsberechtigten Person(en)'] },
       { h: 'Kontakt', p: ['E-Mail: {email}', 'Telefon: TODO: Telefonnummer'] },
@@ -50,7 +55,11 @@ export const legalDe: LegalDict = {
     sections: [
       {
         h: 'Verantwortlicher',
-        p: ['Verantwortlich im Sinne der DSGVO ist der im Impressum genannte Anbieter.', 'TODO: Name und Anschrift des Verantwortlichen', 'E-Mail: {email}'],
+        p: [
+          'Verantwortlich im Sinne der DSGVO ist der im Impressum genannte Anbieter.',
+          'TODO: Name und Anschrift des Verantwortlichen',
+          'E-Mail: {email}',
+        ],
       },
       {
         h: 'Hosting',
@@ -100,7 +109,12 @@ export const legalEn: LegalDict = {
     sections: [
       {
         h: 'Information pursuant to § 5 DDG',
-        p: ['TODO: company name and legal form', 'TODO: street and number', 'TODO: postcode and town', 'Germany'],
+        p: [
+          'TODO: company name and legal form',
+          'TODO: street and number',
+          'TODO: postcode and town',
+          'Germany',
+        ],
       },
       { h: 'Represented by', p: ['TODO: name of the authorised representative(s)'] },
       { h: 'Contact', p: ['Email: {email}', 'Phone: TODO: phone number'] },
@@ -109,7 +123,9 @@ export const legalEn: LegalDict = {
       { h: 'Responsible for content pursuant to § 18 (2) MStV', p: ['TODO: name and address'] },
       {
         h: 'Consumer dispute resolution',
-        p: ['We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.'],
+        p: [
+          'We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.',
+        ],
       },
     ],
   },
@@ -119,7 +135,11 @@ export const legalEn: LegalDict = {
     sections: [
       {
         h: 'Controller',
-        p: ['The controller within the meaning of the GDPR is the provider named in the Impressum.', 'TODO: name and address of the controller', 'Email: {email}'],
+        p: [
+          'The controller within the meaning of the GDPR is the provider named in the Impressum.',
+          'TODO: name and address of the controller',
+          'Email: {email}',
+        ],
       },
       {
         h: 'Hosting',
@@ -169,7 +189,12 @@ export const legalRu: LegalDict = {
     sections: [
       {
         h: 'Сведения согласно § 5 DDG',
-        p: ['TODO: название компании и правовая форма', 'TODO: улица и номер дома', 'TODO: индекс и город', 'Германия'],
+        p: [
+          'TODO: название компании и правовая форма',
+          'TODO: улица и номер дома',
+          'TODO: индекс и город',
+          'Германия',
+        ],
       },
       { h: 'Представитель', p: ['TODO: имя уполномоченного представителя'] },
       { h: 'Контакт', p: ['E-mail: {email}', 'Телефон: TODO: номер телефона'] },
@@ -178,7 +203,9 @@ export const legalRu: LegalDict = {
       { h: 'Ответственный за содержание согласно § 18 абз. 2 MStV', p: ['TODO: имя и адрес'] },
       {
         h: 'Урегулирование споров с потребителями',
-        p: ['Мы не готовы и не обязаны участвовать в процедурах урегулирования споров в потребительской арбитражной комиссии.'],
+        p: [
+          'Мы не готовы и не обязаны участвовать в процедурах урегулирования споров в потребительской арбитражной комиссии.',
+        ],
       },
     ],
   },
@@ -188,7 +215,11 @@ export const legalRu: LegalDict = {
     sections: [
       {
         h: 'Ответственное лицо',
-        p: ['Ответственным в смысле DSGVO является поставщик, указанный в Impressum.', 'TODO: имя и адрес ответственного лица', 'E-mail: {email}'],
+        p: [
+          'Ответственным в смысле DSGVO является поставщик, указанный в Impressum.',
+          'TODO: имя и адрес ответственного лица',
+          'E-mail: {email}',
+        ],
       },
       {
         h: 'Хостинг',

@@ -30,7 +30,13 @@
   z-index: -1;
   background:
     linear-gradient(90deg, rgba(7, 9, 8, 0.86) 0%, rgba(7, 9, 8, 0.58) 34%, rgba(7, 9, 8, 0) 68%),
-    linear-gradient(180deg, rgba(7, 9, 8, 0.55) 0%, rgba(7, 9, 8, 0) 18%, rgba(7, 9, 8, 0) 70%, var(--night) 100%);
+    linear-gradient(
+      180deg,
+      rgba(7, 9, 8, 0.55) 0%,
+      rgba(7, 9, 8, 0) 18%,
+      rgba(7, 9, 8, 0) 70%,
+      var(--night) 100%
+    );
 }
 @media (max-aspect-ratio: 1/1) {
   .hero-scrim {
@@ -776,6 +782,13 @@
   border: 0;
   border-bottom: 1px solid var(--line);
   min-width: 0;
+}
+.check-q legend {
+  float: left;
+  width: 100%;
+}
+.check-q legend + * {
+  clear: both;
 }
 .check-q legend,
 .check-q > label {

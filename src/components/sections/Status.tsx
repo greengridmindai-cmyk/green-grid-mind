@@ -15,7 +15,9 @@ export function Status({ index }: { index: number }) {
   const date = (d: { iso: string; precision: 'day' | 'month' }) =>
     d.precision === 'day'
       ? fmtDate(d.iso, lang)
-      : new Intl.DateTimeFormat(localeOf(lang), { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(d.iso));
+      : new Intl.DateTimeFormat(localeOf(lang), { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(
+          new Date(d.iso),
+        );
   return (
     <section id="status" className="sec bg-night" aria-labelledby="status-title">
       <div className="wrap">

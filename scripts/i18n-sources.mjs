@@ -6,7 +6,10 @@ export async function loadSources() {
   const { textDe } = await import('../src/data/cabinet/text.de.ts');
   const { textEn } = await import('../src/data/cabinet/text.en.ts');
   const { textRu } = await import('../src/data/cabinet/text.ru.ts');
-  const sets = [{ name: 'dict', de, en, ru }, { name: 'cabinet', de: textDe, en: textEn, ru: textRu }];
+  const sets = [
+    { name: 'dict', de, en, ru },
+    { name: 'cabinet', de: textDe, en: textEn, ru: textRu },
+  ];
   try {
     const l = await import('../src/i18n/legal.ts');
     sets.push({ name: 'legal', de: l.legalDe, en: l.legalEn, ru: l.legalRu });
@@ -21,7 +24,8 @@ export async function loadSources() {
 export function flatten(obj, prefix = '') {
   const out = [];
   if (typeof obj === 'string') return [[prefix, obj]];
-  if (Array.isArray(obj)) obj.forEach((v, i) => out.push(...flatten(v, prefix ? `${prefix}.${i}` : String(i))));
+  if (Array.isArray(obj))
+    obj.forEach((v, i) => out.push(...flatten(v, prefix ? `${prefix}.${i}` : String(i))));
   else if (obj && typeof obj === 'object')
     for (const [k, v] of Object.entries(obj)) out.push(...flatten(v, prefix ? `${prefix}.${k}` : k));
   return out;

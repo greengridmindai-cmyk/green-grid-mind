@@ -12,7 +12,12 @@ export interface ConnData {
 }
 
 export const CONNECTIONS: ConnData[] = [
-  { id: 'feed', type: 'power', tag: 'asm', q: [n(5), n(25, 'mm²'), n(40, 'm', { cmp: '≤' }), n(400, 'V'), n(63), n(80, 'A')] },
+  {
+    id: 'feed',
+    type: 'power',
+    tag: 'asm',
+    q: [n(5), n(25, 'mm²'), n(40, 'm', { cmp: '≤' }), n(400, 'V'), n(63), n(80, 'A')],
+  },
   { id: 'upsIn', type: 'power', tag: 'est', q: [n(5), n(10, 'mm²'), n(400, 'V')] },
   { id: 'upsOut', type: 'power', tag: 'est', q: [n(5), n(6, 'mm²'), n(32, 'A'), n(400, 'V')] },
   { id: 'psu', type: 'power', tag: 'asm', q: [n(2), n(230, 'V')] },

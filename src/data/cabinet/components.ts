@@ -250,7 +250,6 @@ export const AVAILABLE_IN: Partial<Record<CompId, ConfigKey[]>> = {
 };
 export const isAvailable = (id: CompId, c: ConfigKey) => AVAILABLE_IN[id]?.includes(c) ?? true;
 
-export const COMP_BY_ID: Record<CompId, CompData> = Object.fromEntries(COMPONENTS.map((c) => [c.id, c])) as Record<
-  CompId,
-  CompData
->;
+export const COMP_BY_ID: Record<CompId, CompData> = Object.fromEntries(
+  COMPONENTS.map((c) => [c.id, c]),
+) as Record<CompId, CompData>;

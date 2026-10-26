@@ -18,7 +18,14 @@ interface Props<V extends string> {
 }
 
 /** Segmented control: group of toggle buttons, ←/→ moves between segments, Enter/Space selects. */
-export function Segmented<V extends string>({ options, value, onChange, label, className = '', size = 'md' }: Props<V>) {
+export function Segmented<V extends string>({
+  options,
+  value,
+  onChange,
+  label,
+  className = '',
+  size = 'md',
+}: Props<V>) {
   const ref = useRef<HTMLDivElement>(null);
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;

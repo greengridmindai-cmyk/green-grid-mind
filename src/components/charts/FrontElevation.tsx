@@ -11,7 +11,15 @@ interface Props {
   config: ConfigKey;
   variant?: 'drawing' | 'hero';
   /** dimension and section labels (already localized and formatted) */
-  labels?: { total: string; ecab: string; rack: string; lcp: string; s800: string; s300: string; height: string };
+  labels?: {
+    total: string;
+    ecab: string;
+    rack: string;
+    lcp: string;
+    s800: string;
+    s300: string;
+    height: string;
+  };
   className?: string;
   title?: string;
 }
@@ -91,9 +99,7 @@ function FrontElevationImpl({ config, variant = 'drawing', labels, className = '
       <Brick u={1} gpus={gpus1} />
       {config !== 'P0' ? <Brick u={5} gpus={gpus2} /> : null}
       {config !== 'P0' ? <Unit u={9} n={2} cls="fe-unit" /> : null}
-      {config === 'P0'
-        ? [11, 14, 17].map((u) => <Unit key={u} u={u} n={3} cls="fe-unit fe-load" />)
-        : null}
+      {config === 'P0' ? [11, 14, 17].map((u) => <Unit key={u} u={u} n={3} cls="fe-unit fe-load" />) : null}
       {Array.from({ length: 26 }, (_, i) => i + 11)
         .filter((u) => config !== 'P0' || u > 19)
         .map((u) => (
@@ -116,7 +122,9 @@ function FrontElevationImpl({ config, variant = 'drawing', labels, className = '
       ))}
       {!hero && labels ? (
         <g className="fe-dims">
-          <path d={`M0 ${H + 110}H${x3}M0 ${H + 80}V${H + 140}M${x1} ${H + 80}V${H + 140}M${x2} ${H + 80}V${H + 140}M${x3} ${H + 80}V${H + 140}`} />
+          <path
+            d={`M0 ${H + 110}H${x3}M0 ${H + 80}V${H + 140}M${x1} ${H + 80}V${H + 140}M${x2} ${H + 80}V${H + 140}M${x3} ${H + 80}V${H + 140}`}
+          />
           <path d={`M0 ${H + 230}H${x3}M0 ${H + 200}V${H + 260}M${x3} ${H + 200}V${H + 260}`} />
           <path d={`M-90 0V${H}M-120 0H-60M-120 ${H}H-60`} />
           <text x={x1 / 2} y={H + 90} textAnchor="middle">
@@ -131,7 +139,13 @@ function FrontElevationImpl({ config, variant = 'drawing', labels, className = '
           <text x={x3 / 2} y={H + 210} textAnchor="middle" className="fe-strong">
             {labels.total}
           </text>
-          <text x={-110} y={H / 2} textAnchor="middle" transform={`rotate(-90 -110 ${H / 2})`} className="fe-strong">
+          <text
+            x={-110}
+            y={H / 2}
+            textAnchor="middle"
+            transform={`rotate(-90 -110 ${H / 2})`}
+            className="fe-strong"
+          >
             {labels.height}
           </text>
           <text x={x1 / 2} y={H + 320} textAnchor="middle" className="fe-name">

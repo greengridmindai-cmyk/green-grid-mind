@@ -20,7 +20,8 @@ export function SeasonBars() {
   const [hover, setHover] = useState<number | null>(null);
   const monthFmt = new Intl.DateTimeFormat(localeOf(lang), { month: 'short', timeZone: 'UTC' });
   const monthLong = new Intl.DateTimeFormat(localeOf(lang), { month: 'long', timeZone: 'UTC' });
-  const month = (m: number, long = false) => (long ? monthLong : monthFmt).format(new Date(Date.UTC(2026, m - 1, 1)));
+  const month = (m: number, long = false) =>
+    (long ? monthLong : monthFmt).format(new Date(Date.UTC(2026, m - 1, 1)));
   const pctQ = (p: number) => fmtQ(n(p, '%'), lang);
   const gpuh = (v: number) => fmtQ(n(v, 'GPU·h'), lang);
   const active = hover !== null ? SEASON[hover] : null;
@@ -56,7 +57,14 @@ export function SeasonBars() {
                 onBlur={() => setHover(null)}
               >
                 <rect className="hit" x={PAD.l + i * step} y={PAD.t} width={step} height={ih} />
-                <rect className="b" x={x} y={Yp(m.pct)} width={w} height={Yp(0) - Yp(m.pct)} style={{ '--i': i } as CSSProperties} />
+                <rect
+                  className="b"
+                  x={x}
+                  y={Yp(m.pct)}
+                  width={w}
+                  height={Yp(0) - Yp(m.pct)}
+                  style={{ '--i': i } as CSSProperties}
+                />
                 <text className="val" x={x + w / 2} y={Yp(m.pct) - 8} textAnchor="middle">
                   {fmtQ(n(m.pct), lang)}
                 </text>

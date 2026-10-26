@@ -10,7 +10,9 @@ const errors = [];
 const PLACEHOLDER = /\{[A-Za-z0-9_]+\}/g;
 const hasWords = (s) => /\p{L}{2,}/u.test(s.replace(PLACEHOLDER, ''));
 const whitelisted = (path) =>
-  SAME_IN_ALL_LANGS.some((p) => new RegExp(`^${p.replace(/\./g, '\\.').replace(/\*/g, '[^.]+')}$`).test(path));
+  SAME_IN_ALL_LANGS.some((p) =>
+    new RegExp(`^${p.replace(/\./g, '\\.').replace(/\*/g, '[^.]+')}$`).test(path),
+  );
 
 // Term texts per language
 const termTexts = (lang) =>

@@ -62,7 +62,13 @@ export function Header({ onHome = true }: { onHome?: boolean }) {
           </div>
         </div>
       </header>
-      <MobileMenu open={open} onClose={() => setOpen(false)} burger={burger} header={headerRef} onHome={onHome} />
+      <MobileMenu
+        open={open}
+        onClose={() => setOpen(false)}
+        burger={burger}
+        header={headerRef}
+        onHome={onHome}
+      />
     </>
   );
 }

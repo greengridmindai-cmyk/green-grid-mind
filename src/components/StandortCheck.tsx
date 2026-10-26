@@ -18,7 +18,13 @@ const STATUS_KEY: Record<SiteStatus, keyof Dict['check']['status']> = {
   incomplete: 'incomplete',
 };
 
-function Choice({ name, label, options, value, onChange }: {
+function Choice({
+  name,
+  label,
+  options,
+  value,
+  onChange,
+}: {
   name: string;
   label: ReactNode;
   options: Opt[];
@@ -31,7 +37,13 @@ function Choice({ name, label, options, value, onChange }: {
       <div className="check-opts">
         {options.map((o) => (
           <label key={o.v} className="opt">
-            <input type="radio" name={name} value={o.v} checked={value === o.v} onChange={() => onChange(o.v)} />
+            <input
+              type="radio"
+              name={name}
+              value={o.v}
+              checked={value === o.v}
+              onChange={() => onChange(o.v)}
+            />
             <span>{o.label}</span>
           </label>
         ))}
@@ -42,7 +54,11 @@ function Choice({ name, label, options, value, onChange }: {
 
 function useVars(lang: Lang) {
   return useMemo(
-    () => Object.fromEntries(Object.entries(SITE_VARS).map(([k, q]) => [k, fmtQ(q, lang)])) as Record<keyof typeof SITE_VARS, string>,
+    () =>
+      Object.fromEntries(Object.entries(SITE_VARS).map(([k, q]) => [k, fmtQ(q, lang)])) as Record<
+        keyof typeof SITE_VARS,
+        string
+      >,
     [lang],
   );
 }
@@ -56,7 +72,10 @@ export function StandortCheck() {
   const [input, setInput] = useState<SiteInput>({});
   const res = evaluateSite(input);
   const set = (k: Key) => (val: string) =>
-    setInput((s) => ({ ...s, [k]: k === 'pv' ? (val === '' ? null : Math.max(0, Math.min(2000, Number(val)))) : val }));
+    setInput((s) => ({
+      ...s,
+      [k]: k === 'pv' ? (val === '' ? null : Math.max(0, Math.min(2000, Number(val)))) : val,
+    }));
 
   const yn = (unsure = true): Opt[] => [
     { v: 'yes', label: c.yes, text: c.yes },
@@ -65,7 +84,11 @@ export function StandortCheck() {
   ];
   const q = (s: string) => <R s={s} v={v} />;
   const questions: { k: Key; label: string; opts: Opt[] }[] = [
-    { k: 'state', label: c.q.state, opts: (['by', 'bw', 'other'] as const).map((s) => ({ v: s, label: c.states[s], text: c.states[s] })) },
+    {
+      k: 'state',
+      label: c.q.state,
+      opts: (['by', 'bw', 'other'] as const).map((s) => ({ v: s, label: c.states[s], text: c.states[s] })),
+    },
     { k: 'bess', label: c.q.bess, opts: yn(false) },
     {
       k: 'reserve',
@@ -101,9 +124,14 @@ export function StandortCheck() {
       `${plain(c.q.pv, lang)}: ${input.pv != null ? fmtQ(n(input.pv, 'kWp'), lang) : c.summary.none}`,
       ...questions
         .filter((x) => x.k !== 'state')
-        .map((x) => `${plain(x.label, lang, v)}: ${x.opts.find((o) => o.v === input[x.k])?.text ?? c.summary.none}`),
+        .map(
+          (x) =>
+            `${plain(x.label, lang, v)}: ${x.opts.find((o) => o.v === input[x.k])?.text ?? c.summary.none}`,
+        ),
     ];
-    const marks = res.criteria.map((cr) => `${cr.mark === 'ok' ? '✓' : cr.mark === 'fail' ? '✕' : '?'} ${criterionText(cr.id)}`);
+    const marks = res.criteria.map(
+      (cr) => `${cr.mark === 'ok' ? '✓' : cr.mark === 'fail' ? '✕' : '?'} ${criterionText(cr.id)}`,
+    );
     const msg = [
       `${c.summary.title}`,
       `${c.summary.result}: ${statusText}`,
@@ -127,7 +155,14 @@ export function StandortCheck() {
         <p className="t-small muted">{c.privacy}</p>
         <div className="check-qs">
           {questions.slice(0, 1).map((x) => (
-            <Choice key={x.k} name={`${uid}-${x.k}`} label={q(x.label)} options={x.opts} value={input[x.k] as string | undefined} onChange={set(x.k)} />
+            <Choice
+              key={x.k}
+              name={`${uid}-${x.k}`}
+              label={q(x.label)}
+              options={x.opts}
+              value={input[x.k] as string | undefined}
+              onChange={set(x.k)}
+            />
           ))}
           <div className="field check-q">
             <label className="t-label" htmlFor={`${uid}-pv`}>
@@ -151,7 +186,14 @@ export function StandortCheck() {
             </div>
           </div>
           {questions.slice(1).map((x) => (
-            <Choice key={x.k} name={`${uid}-${x.k}`} label={q(x.label)} options={x.opts} value={input[x.k] as string | undefined} onChange={set(x.k)} />
+            <Choice
+              key={x.k}
+              name={`${uid}-${x.k}`}
+              label={q(x.label)}
+              options={x.opts}
+              value={input[x.k] as string | undefined}
+              onChange={set(x.k)}
+            />
           ))}
         </div>
       </form>
@@ -183,7 +225,12 @@ export function StandortCheck() {
               </li>
             ))}
         </ul>
-        <button type="button" className="btn" onClick={send} disabled={res.status === 'incomplete' && !Object.keys(input).length}>
+        <button
+          type="button"
+          className="btn"
+          onClick={send}
+          disabled={res.status === 'incomplete' && !Object.keys(input).length}
+        >
           <span>{c.send}</span>
           <span className="arr" aria-hidden="true">
             →

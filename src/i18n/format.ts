@@ -37,7 +37,11 @@ export type Q =
   | { k: 'p'; a: number; b: number; unit?: Unit; approx?: boolean; d?: number }
   | { k: 'x'; vals: number[]; unit?: Unit; d?: number };
 
-export const n = (v: number, unit?: Unit, o: { approx?: boolean; cmp?: '≥' | '≤' | '<' | '>'; d?: number } = {}): Q => ({
+export const n = (
+  v: number,
+  unit?: Unit,
+  o: { approx?: boolean; cmp?: '≥' | '≤' | '<' | '>'; d?: number } = {},
+): Q => ({
   k: 'n',
   v,
   ...(unit ? { unit } : {}),
@@ -98,7 +102,8 @@ export function fmtNum(v: number, lang: Lang, d = decimals(v)): string {
     .join('');
 }
 
-const withUnit = (s: string, unit?: Unit) => (unit ? (unit === '%' ? `${s}${NNBSP}%` : `${s}${NNBSP}${unit}`) : s);
+const withUnit = (s: string, unit?: Unit) =>
+  unit ? (unit === '%' ? `${s}${NNBSP}%` : `${s}${NNBSP}${unit}`) : s;
 
 export function fmtQ(q: Q, lang: Lang): string {
   switch (q.k) {
@@ -121,9 +126,12 @@ export function fmtQ(q: Q, lang: Lang): string {
 
 export function fmtDate(iso: string, lang: Lang): string {
   const [y, m, d] = iso.split('-').map(Number);
-  return new Intl.DateTimeFormat(LOCALE[lang], { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(
-    new Date(Date.UTC(y ?? 2026, (m ?? 1) - 1, d ?? 1)),
-  );
+  return new Intl.DateTimeFormat(LOCALE[lang], {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(Date.UTC(y ?? 2026, (m ?? 1) - 1, d ?? 1)));
 }
 
 export const localeOf = (lang: Lang) => LOCALE[lang];

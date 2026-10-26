@@ -46,7 +46,9 @@ export function MobileMenu({ open, onClose, burger, header, onHome }: Props) {
         return;
       }
       if (e.key !== 'Tab') return;
-      const inHeader = [...(header.current?.querySelectorAll<HTMLElement>('.header-actions ' + FOCUSABLE) ?? [])];
+      const inHeader = [
+        ...(header.current?.querySelectorAll<HTMLElement>('.header-actions ' + FOCUSABLE) ?? []),
+      ];
       const inMenu = [...(ref.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? [])];
       const all = [...inHeader, ...inMenu].filter((el) => el.offsetParent !== null);
       if (!all.length) return;
@@ -95,7 +97,10 @@ export function MobileMenu({ open, onClose, burger, header, onHome }: Props) {
             {t.nav.kontakt}
           </ButtonLink>
         </div>
-        <div className="menu-legal menu-item t-small" style={{ '--mi': SECTION_IDS.length + 2 } as CSSProperties}>
+        <div
+          className="menu-legal menu-item t-small"
+          style={{ '--mi': SECTION_IDS.length + 2 } as CSSProperties}
+        >
           <a href={pageHref('impressum', lang)}>{t.nav.impressum}</a>
           <a href={pageHref('datenschutz', lang)}>{t.nav.datenschutz}</a>
         </div>

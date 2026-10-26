@@ -48,7 +48,8 @@ export const de = {
     spec: 'Vorgabe, noch nicht getestet',
     open: 'Noch nicht entschieden',
   },
-  footnote: 'Alle Leistungs-, Maß- und Wärmeangaben sind Richtwerte bis zum Vorliegen von Herstellerangeboten.',
+  footnote:
+    'Alle Leistungs-, Maß- und Wärmeangaben sind Richtwerte bis zum Vorliegen von Herstellerangeboten.',
   revMeta: 'Rev {rev} · {date}',
   hero: {
     label: 'Pilotphase · Bayern & Baden-Württemberg',
@@ -92,7 +93,8 @@ export const de = {
         flex: 'Knoten: flexibler Anteil',
       },
       axis: 'Uhrzeit',
-      caption: 'Relative Verläufe, schematisch. Die Grundlast läuft immer, der flexible Anteil füllt den Überschuss.',
+      caption:
+        'Relative Verläufe, schematisch. Die Grundlast läuft immer, der flexible Anteil füllt den Überschuss.',
       cols: { hour: 'Stunde', pv: '{PV}', farm: 'Hof', base: 'Grundlast', flex: 'Flexibel' },
     },
     season: {
@@ -367,7 +369,8 @@ export const de = {
     steps: {
       concept: 'Technisches Konzept und Engineering-Plan v1.0',
       ems: 'Spezifikation Energiemanagement ({EMS}) Rev 2.0',
-      cooling: 'Kühlkonzept festgelegt: geschlossener Luftkreislauf, wassergekühlter {LCP}, Außen-Chiller mit Freikühlung',
+      cooling:
+        'Kühlkonzept festgelegt: geschlossener Luftkreislauf, wassergekühlter {LCP}, Außen-Chiller mit Freikühlung',
       p0: 'Prototyp-Schrank {P0} — Rev 0.1; {GPU}-Auswahl offen',
       electrical: 'Elektroschema und Anbindung an die Infrastruktur',
       site: 'Pilotstandort mit {q0} freier Reserve',
@@ -416,7 +419,8 @@ export const de = {
       sending: 'Wird gesendet …',
       success: 'Danke. Ihre Nachricht ist angekommen.',
       error: 'Senden fehlgeschlagen. Bitte schreiben Sie uns direkt per E-Mail.',
-      mailto: 'Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Nachricht. Falls nicht, kopieren Sie den Text.',
+      mailto:
+        'Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Nachricht. Falls nicht, kopieren Sie den Text.',
     },
     subject: '[{GGM}] {role} – {name}',
     bodyHead: 'Nachricht über {site}',

@@ -47,7 +47,9 @@ function markOf(id: CriterionId, i: SiteInput): Criterion {
   if (v === undefined) return { id, mark: 'unknown', answered: false };
   switch (id) {
     case 'state':
-      return v === 'other' ? { id, mark: 'fail', answered: true, note: 'outside' } : { id, mark: 'ok', answered: true };
+      return v === 'other'
+        ? { id, mark: 'fail', answered: true, note: 'outside' }
+        : { id, mark: 'ok', answered: true };
     case 'reserve':
       if (v === 'ge24' || v === '16to24') return { id, mark: 'ok', answered: true };
       if (v === 'lt16') return { id, mark: 'fail', answered: true, note: 'lowReserve' };

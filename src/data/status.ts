@@ -3,7 +3,12 @@ import { n, type Q } from '../i18n/format.ts';
 
 export type StepState = 'done' | 'progress' | 'planned';
 
-export const STATUS_STEPS: { id: string; state: StepState; date?: { iso: string; precision: 'day' | 'month' }; q?: Q[] }[] = [
+export const STATUS_STEPS: {
+  id: string;
+  state: StepState;
+  date?: { iso: string; precision: 'day' | 'month' };
+  q?: Q[];
+}[] = [
   { id: 'concept', state: 'done' },
   { id: 'ems', state: 'done' },
   { id: 'cooling', state: 'done', date: { iso: '2026-10-01', precision: 'month' } },

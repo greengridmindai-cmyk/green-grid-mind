@@ -47,7 +47,8 @@ export const en: Dict = {
     spec: 'Specified requirement, not yet tested',
     open: 'Not decided yet',
   },
-  footnote: 'All power, dimension and heat figures are indicative values until manufacturer quotations are available.',
+  footnote:
+    'All power, dimension and heat figures are indicative values until manufacturer quotations are available.',
   revMeta: 'Rev {rev} · {date}',
   hero: {
     label: 'Pilot phase · Bavaria & Baden-Württemberg',
@@ -366,7 +367,8 @@ export const en: Dict = {
     steps: {
       concept: 'Technical concept and engineering plan v1.0',
       ems: 'Energy management ({EMS}) specification Rev 2.0',
-      cooling: 'Cooling concept fixed: closed air loop, water-cooled {LCP}, outdoor chiller with free cooling',
+      cooling:
+        'Cooling concept fixed: closed air loop, water-cooled {LCP}, outdoor chiller with free cooling',
       p0: 'Prototype cabinet {P0} — Rev 0.1; {GPU} choice open',
       electrical: 'Electrical schematic and connection to the infrastructure',
       site: 'Pilot site with {q0} free capacity',

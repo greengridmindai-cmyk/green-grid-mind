@@ -10,7 +10,14 @@ interface Props {
 }
 
 /** Link styled as a button, with the trailing arrow micro-interaction. */
-export function ButtonLink({ href, children, variant = 'primary', size = 'md', onClick, className = '' }: Props) {
+export function ButtonLink({
+  href,
+  children,
+  variant = 'primary',
+  size = 'md',
+  onClick,
+  className = '',
+}: Props) {
   const cls = variant === 'primary' ? `btn ${size === 'sm' ? 'btn-sm' : ''}` : 'btn-ghost';
   return (
     <a href={href} className={`${cls} ${className}`} onClick={onClick}>

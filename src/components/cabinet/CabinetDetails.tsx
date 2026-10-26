@@ -95,7 +95,9 @@ export function CabinetDetails({ config }: { config: ConfigKey }) {
               <tbody>
                 {RACK_LAYOUT.map((row) => (
                   <tr key={row.id}>
-                    <td className="mono">{row.u ? (row.u[0] === row.u[1] ? row.u[0] : `${row.u[0]}–${row.u[1]}`) : ct.rack.zeroU}</td>
+                    <td className="mono">
+                      {row.u ? (row.u[0] === row.u[1] ? row.u[0] : `${row.u[0]}–${row.u[1]}`) : ct.rack.zeroU}
+                    </td>
                     <td>
                       <R s={ct.rack.rows[row.id]} />
                     </td>
@@ -187,7 +189,8 @@ export function CabinetDetails({ config }: { config: ConfigKey }) {
               <li key={s.id}>
                 <a className="link" href={s.url} target="_blank" rel="noopener noreferrer">
                   <span translate="no">{s.label ?? ''}</span>
-                  {s.label ? null : <R s={ct.sources.emulator} />} <span className="sr-only">{t.a11y.newTab}</span>
+                  {s.label ? null : <R s={ct.sources.emulator} />}{' '}
+                  <span className="sr-only">{t.a11y.newTab}</span>
                   <span aria-hidden="true">↗</span>
                 </a>
               </li>

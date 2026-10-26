@@ -13,7 +13,9 @@ export function requestContact(d: ContactDraft) {
   window.dispatchEvent(new CustomEvent<ContactDraft>(EVENT, { detail: d }));
   const el = document.getElementById('kontakt');
   if (el) {
-    el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    el.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
     const url = new URL(window.location.href);
     url.hash = 'kontakt';
     window.history.replaceState(window.history.state, '', url);

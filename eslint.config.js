@@ -5,7 +5,31 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 
 /** Characters allowed as JSX text: typographic symbols only, never words (all words come from i18n). */
-const ALLOWED = ['→', '←', '↔', '●', '·', '/', '×', '–', '—', '✓', '✕', '?', '|', ':', '(', ')', '%', ',', '+', '[', ']', '•', '↗'];
+const ALLOWED = [
+  '→',
+  '←',
+  '↔',
+  '●',
+  '·',
+  '/',
+  '×',
+  '–',
+  '—',
+  '✓',
+  '✕',
+  '?',
+  '|',
+  ':',
+  '(',
+  ')',
+  '%',
+  ',',
+  '+',
+  '[',
+  ']',
+  '•',
+  '↗',
+];
 
 export default tseslint.config(
   {

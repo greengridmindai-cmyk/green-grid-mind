@@ -32,19 +32,31 @@ export const RACK_LAYOUT: RackRow[] = [
  * entries without a label take their text from the localized `sources` map.
  */
 export const SOURCES: { id: string; label?: string; url: string }[] = [
-  { id: 'lcp', label: 'Rittal LCP Rack CW 3311.260', url: 'https://www.rittal.com/pdf-creator/variant/ca-en/3311260' },
+  {
+    id: 'lcp',
+    label: 'Rittal LCP Rack CW 3311.260',
+    url: 'https://www.rittal.com/pdf-creator/variant/ca-en/3311260',
+  },
   {
     id: 'dell',
     label: 'Dell XE7745',
     url: 'https://www.delltechnologies.com/asset/de-ch/products/servers/technical-support/poweredge-xe7745-spec-sheet.pdf',
   },
-  { id: 'hpe', label: 'HPE DL380a Gen12', url: 'https://www.hpe.com/us/en/compute/proliant-dl380a-gen12.html' },
+  {
+    id: 'hpe',
+    label: 'HPE DL380a Gen12',
+    url: 'https://www.hpe.com/us/en/compute/proliant-dl380a-gen12.html',
+  },
   {
     id: 'gpu',
     label: 'RTX PRO 6000 BSE',
     url: 'https://www.akamai.com/site/en/documents/corporate/nvidia-rtx-pro-6000-blackwell-server-edition-datasheet.pdf',
   },
-  { id: 'ups', label: 'Eaton 93PX 20 kVA', url: 'https://bechtle.com/gb/shop/eaton-93px-20kva-rt9u-ups-400-230v--4749166--p' },
+  {
+    id: 'ups',
+    label: 'Eaton 93PX 20 kVA',
+    url: 'https://bechtle.com/gb/shop/eaton-93px-20kva-rt9u-ups-400-230v--4749166--p',
+  },
   {
     id: 'emulator',
     url: 'https://www.datacenterdynamics.com/en/news/mafi-mushkila-launches-new-server-emulator-for-data-centers/',

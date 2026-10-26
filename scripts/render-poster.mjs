@@ -4,12 +4,15 @@ import { chromium } from 'playwright';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
 const URL = process.env.POSTER_URL ?? 'http://localhost:4174/green-grid-mind/?e2e#modell';
-const browser = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+const browser = await chromium.launch({
+  args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
+});
 const page = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
 await page.goto(URL);
 await page.waitForFunction(() => '__ggm' in window, null, { timeout: 60_000 });
 await page.addStyleTag({
-  content: '.cab-stage{width:1440px!important;height:900px!important;min-height:0!important;border:0!important}.cab-grid{grid-template-columns:1440px!important}.cab-side{display:none!important}',
+  content:
+    '.cab-stage{width:1440px!important;height:900px!important;min-height:0!important;border:0!important}.cab-grid{grid-template-columns:1440px!important}.cab-side{display:none!important}',
 });
 await page.evaluate(() => document.querySelector('.cab-stage')?.scrollIntoView({ block: 'center' }));
 await page.waitForTimeout(500);

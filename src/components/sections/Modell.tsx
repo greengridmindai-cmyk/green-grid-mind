@@ -14,7 +14,14 @@ function Poster() {
     <div className="wrap-wide">
       <div className="cab-stage cab-stage-static">
         <div className="cab-poster">
-          <img src={POSTER} alt={plain(t.modell.posterAlt, lang)} width={1440} height={900} decoding="async" loading="lazy" />
+          <img
+            src={POSTER}
+            alt={plain(t.modell.posterAlt, lang)}
+            width={1440}
+            height={900}
+            decoding="async"
+            loading="lazy"
+          />
           <p className="t-label cab-loading">{t.modell.loading}</p>
         </div>
       </div>

@@ -312,7 +312,8 @@
     overflow-y: auto;
     background: var(--night-2);
     border-top: 1px solid var(--line-strong);
-    padding: 20px max(var(--gutter), env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px));
+    padding: 20px max(var(--gutter), env(safe-area-inset-left, 0px))
+      calc(24px + env(safe-area-inset-bottom, 0px));
     animation: sheet-in 0.45s var(--ease-out);
   }
 }

@@ -12,7 +12,9 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}/green-grid-mind/`,
     ...devices['Desktop Chrome'],
     viewport: { width: 1440, height: 900 },
-    launchOptions: { args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
+    launchOptions: {
+      args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
+    },
   },
   webServer: {
     command: `npm run build && npx vite preview --port ${PORT} --strictPort`,

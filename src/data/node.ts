@@ -142,7 +142,10 @@ export const CONFIG_ROWS: ConfigRow[] = [
 ];
 
 /** Site requirements (§14.2) — used in "Für Höfe" and Standort-Check. */
-export const SITE_REQS: { id: 'room' | 'reserve' | 'floor' | 'clearance' | 'cable' | 'outdoor'; value?: Q }[] = [
+export const SITE_REQS: {
+  id: 'room' | 'reserve' | 'floor' | 'clearance' | 'cable' | 'outdoor';
+  value?: Q;
+}[] = [
   { id: 'room', value: dims([3.2, 3.0], 'm', 1) },
   { id: 'reserve', value: n(24, 'kW', { cmp: '≥' }) },
   { id: 'floor', value: n(500, 'kg/m²') },

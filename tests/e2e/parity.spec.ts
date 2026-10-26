@@ -9,7 +9,7 @@
  * The legacy page loads Three.js r128 from a CDN — requests are served from node_modules.
  */
 import { test, expect, type Page } from '@playwright/test';
-import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { COMPONENTS, AVAILABLE_IN } from '../../src/data/cabinet/components.ts';
 
@@ -17,6 +17,9 @@ const ROOT = process.cwd();
 const OUT = resolve(ROOT, 'test-results/parity');
 const THREE_MIN = readFileSync(resolve(ROOT, 'node_modules/three/build/three.min.js'));
 const ORBIT = readFileSync(resolve(ROOT, 'node_modules/three/examples/js/controls/OrbitControls.js'));
+
+// legacy/ is removed after parity was verified (brief §1). To re-run: `git show 660c6d9:legacy/index.html > legacy/index.html`.
+test.skip(!existsSync(resolve(ROOT, 'legacy/index.html')), 'legacy/index.html not present');
 
 const SCENE_VARS = `--scene:#0c0f0d!important;--floor:#141915!important;--ground:#1b211c!important;--wall:#3b4540!important;--grid:#242c27!important;--muted:#9aa39c!important;--ink:#ecf0ea!important;`;
 const LEGACY_CSS = `:root,:root[data-theme]{${SCENE_VARS}}
@@ -36,8 +39,12 @@ type Api = {
 };
 
 async function openLegacy(page: Page) {
-  await page.route(/three\.min\.js$/, (r) => r.fulfill({ body: THREE_MIN, contentType: 'application/javascript' }));
-  await page.route(/OrbitControls\.js$/, (r) => r.fulfill({ body: ORBIT, contentType: 'application/javascript' }));
+  await page.route(/three\.min\.js$/, (r) =>
+    r.fulfill({ body: THREE_MIN, contentType: 'application/javascript' }),
+  );
+  await page.route(/OrbitControls\.js$/, (r) =>
+    r.fulfill({ body: ORBIT, contentType: 'application/javascript' }),
+  );
   await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.abort());
   await page.goto(`file://${resolve(ROOT, 'legacy/index.html')}#cabinet`);
   await page.waitForFunction(() => 'GGM' in window);
@@ -68,14 +75,19 @@ async function openNew(page: Page) {
 async function shot(page: Page, legacy: boolean, config: string, view: string): Promise<string> {
   await page.evaluate(
     ([c, v, l]) => {
-      const g = (l ? (window as unknown as { GGM: Api }).GGM : (window as unknown as { __ggm: Api }).__ggm) as Api;
+      const g = (
+        l ? (window as unknown as { GGM: Api }).GGM : (window as unknown as { __ggm: Api }).__ggm
+      ) as Api;
       g.setConfig(c as string);
       g.setView(v as string, true);
     },
     [config, view, legacy] as const,
   );
   await page.waitForTimeout(900);
-  return page.evaluate((sel) => (document.querySelector(sel) as HTMLCanvasElement).toDataURL('image/png'), legacy ? '#c' : '.cab-canvas');
+  return page.evaluate(
+    (sel) => (document.querySelector(sel) as HTMLCanvasElement).toDataURL('image/png'),
+    legacy ? '#c' : '.cab-canvas',
+  );
 }
 
 async function diff(page: Page, a: string, b: string) {
@@ -107,7 +119,11 @@ async function diff(page: Page, a: string, b: string) {
       const od = ox.createImageData(w, h);
       let bad = 0;
       for (let i = 0; i < da.length; i += 4) {
-        const d = Math.max(Math.abs((da[i] ?? 0) - (db[i] ?? 0)), Math.abs((da[i + 1] ?? 0) - (db[i + 1] ?? 0)), Math.abs((da[i + 2] ?? 0) - (db[i + 2] ?? 0)));
+        const d = Math.max(
+          Math.abs((da[i] ?? 0) - (db[i] ?? 0)),
+          Math.abs((da[i + 1] ?? 0) - (db[i + 1] ?? 0)),
+          Math.abs((da[i + 2] ?? 0) - (db[i + 2] ?? 0)),
+        );
         const miss = d > 32;
         if (miss) bad++;
         od.data[i] = miss ? 255 : (da[i] ?? 0) / 4;
@@ -116,7 +132,11 @@ async function diff(page: Page, a: string, b: string) {
         od.data[i + 3] = 255;
       }
       ox.putImageData(od, 0, 0);
-      return { ratio: bad / (w * h), size: [ia.width, ia.height, ib.width, ib.height], img: out.toDataURL('image/png') };
+      return {
+        ratio: bad / (w * h),
+        size: [ia.width, ia.height, ib.width, ib.height],
+        img: out.toDataURL('image/png'),
+      };
     },
     [a, b] as const,
   );
@@ -192,7 +212,12 @@ test('3D parity: every component shows the same spec values (RU)', async ({ brow
       },
       [comp.id, config] as const,
     );
-    await next.locator('.cab-toolbar .seg').first().locator('button').nth(['M', 'L', 'P0'].indexOf(config)).click();
+    await next
+      .locator('.cab-toolbar .seg')
+      .first()
+      .locator('button')
+      .nth(['M', 'L', 'P0'].indexOf(config))
+      .click();
     await next.evaluate((id) => (window as unknown as { __ggm: Api }).__ggm.select(id), comp.id);
     await next.waitForSelector(`.cab-card-inner[data-comp="${comp.id}"]`);
     const b = await next.evaluate(() =>
@@ -200,7 +225,10 @@ test('3D parity: every component shows the same spec values (RU)', async ({ brow
         const clone = row.cloneNode(true) as HTMLElement;
         clone.querySelectorAll('.sr-only').forEach((e) => e.remove());
         document.body.appendChild(clone);
-        const out = [(clone.children[0] as HTMLElement).innerText, (clone.children[1] as HTMLElement).innerText];
+        const out = [
+          (clone.children[0] as HTMLElement).innerText,
+          (clone.children[1] as HTMLElement).innerText,
+        ];
         clone.remove();
         return out;
       }),

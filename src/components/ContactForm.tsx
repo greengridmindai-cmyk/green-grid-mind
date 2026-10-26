@@ -115,7 +115,12 @@ export function ContactForm() {
         <label className="t-label" htmlFor={`${id}-role`}>
           {f.role}
         </label>
-        <select id={`${id}-role`} className="input" value={role} onChange={(e) => setRole(e.target.value as Role)}>
+        <select
+          id={`${id}-role`}
+          className="input"
+          value={role}
+          onChange={(e) => setRole(e.target.value as Role)}
+        >
           {ROLES.map((r) => (
             <option key={r} value={r}>
               {f.roles[r]}
@@ -128,7 +133,13 @@ export function ContactForm() {
           <label className="t-label" htmlFor={`${id}-name`}>
             {f.name}
           </label>
-          <input id={`${id}-name`} className="input" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <input
+            id={`${id}-name`}
+            className="input"
+            autoComplete="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div className="field">
           <label className="t-label" htmlFor={`${id}-email`}>
@@ -153,7 +164,13 @@ export function ContactForm() {
         <label className="t-label" htmlFor={`${id}-org`}>
           {f.org} <span className="dim">{`(${t.check.optional})`}</span>
         </label>
-        <input id={`${id}-org`} className="input" autoComplete="organization" value={org} onChange={(e) => setOrg(e.target.value)} />
+        <input
+          id={`${id}-org`}
+          className="input"
+          autoComplete="organization"
+          value={org}
+          onChange={(e) => setOrg(e.target.value)}
+        />
       </div>
       <div className="field">
         <label className="t-label" htmlFor={`${id}-message`}>
@@ -179,7 +196,13 @@ export function ContactForm() {
       </div>
       <div className="hp" aria-hidden="true">
         <label htmlFor={`${id}-website`}>{f.honeypot}</label>
-        <input id={`${id}-website`} tabIndex={-1} autoComplete="off" value={hp} onChange={(e) => setHp(e.target.value)} />
+        <input
+          id={`${id}-website`}
+          tabIndex={-1}
+          autoComplete="off"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+        />
       </div>
       <div className="field">
         <label className="check-box">
@@ -228,7 +251,13 @@ export function ContactForm() {
         {copyState === 'fail' ? <p className="err">{f.copyFailed}</p> : null}
       </div>
       {copyState === 'fail' || state === 'mailto' ? (
-        <textarea className="input copy-area" readOnly value={`${subject}\n\n${body}`} rows={8} aria-label={f.copy} />
+        <textarea
+          className="input copy-area"
+          readOnly
+          value={`${subject}\n\n${body}`}
+          rows={8}
+          aria-label={f.copy}
+        />
       ) : null}
     </form>
   );

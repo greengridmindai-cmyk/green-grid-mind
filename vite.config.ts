@@ -31,7 +31,10 @@ function htmlHardening(): Plugin {
       order: 'post',
       handler(html, ctx) {
         const hashes = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(
-          (m) => `'sha256-${createHash('sha256').update(m[1] ?? '').digest('base64')}'`,
+          (m) =>
+            `'sha256-${createHash('sha256')
+              .update(m[1] ?? '')
+              .digest('base64')}'`,
         );
         let connect = "'self'";
         if (FORM_ENDPOINT) connect += ` ${new URL(FORM_ENDPOINT).origin}`;

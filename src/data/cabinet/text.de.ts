@@ -62,7 +62,11 @@ export const textDe: CabinetText = {
         air: ['Luft', '{q0}, Masse {q1}'],
         size: ['Baugröße für {q0}', 'kleiner / Alternativen'],
       },
-      links: ['Vorlauf/Rücklauf ← Chiller (3)', 'Versorgung 400 V ← Verteiler (7)', '{SNMP}/{Modbus} → {EMS} (8)'],
+      links: [
+        'Vorlauf/Rücklauf ← Chiller (3)',
+        'Versorgung 400 V ← Verteiler (7)',
+        '{SNMP}/{Modbus} → {EMS} (8)',
+      ],
     },
     chiller: {
       name: 'Außen-Chiller mit Freikühlung',
@@ -272,7 +276,11 @@ export const textDe: CabinetText = {
   conn: {
     types: { power: 'Leistung', data: 'Daten', safety: 'Sicherheit', water: 'Wasser', air: 'Luft' },
     rows: {
-      feed: ['{NSHV} des Hofes → Verteiler {GGM}', '{q0} × {q1} {Cu} {NYYJ}, {q2}', '{q3} 3~, {NH} {q4}/{q5} {gG}'],
+      feed: [
+        '{NSHV} des Hofes → Verteiler {GGM}',
+        '{q0} × {q1} {Cu} {NYYJ}, {q2}',
+        '{q3} 3~, {NH} {q4}/{q5} {gG}',
+      ],
       upsIn: ['Verteiler → {USV}-Eingang', '{q0} × {q1} {Cu}', '{q2} 3~'],
       upsOut: ['{USV}-Ausgang → {PDU} A, {PDU} B', '{q0} × {q1} / {CEE} {q2}', '{q3} 3~, {q2} je {PDU}'],
       psu: ['{PDU} → Server-Netzteile', '{C19C20}, je {q0} Pfade A/B', '{q1}'],

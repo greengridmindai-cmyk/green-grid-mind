@@ -12,15 +12,21 @@ const X = (h: number) => PAD.l + (h / 24) * iw;
 const Yv = (v: number) => PAD.t + ih - (v / 1.08) * ih;
 const HOURS = Array.from({ length: 97 }, (_, i) => i / 4);
 
-const line = (f: (h: number) => number) => HOURS.map((h, i) => `${i ? 'L' : 'M'}${X(h).toFixed(1)},${Yv(f(h)).toFixed(1)}`).join('');
+const line = (f: (h: number) => number) =>
+  HOURS.map((h, i) => `${i ? 'L' : 'M'}${X(h).toFixed(1)},${Yv(f(h)).toFixed(1)}`).join('');
 
 /** Schematic 24 h curve (§5.2 B): PV, farm load, node base band and flexible band under the surplus. */
 export function DayCurve() {
   const { t, lang } = useI18n();
   const d = t.prinzip.day;
   const paths = useMemo(() => {
-    const flexTop = HOURS.map((h, i) => `${i ? 'L' : 'M'}${X(h).toFixed(1)},${Yv(farm(h) + flex(h)).toFixed(1)}`).join('');
-    const farmBack = [...HOURS].reverse().map((h) => `L${X(h).toFixed(1)},${Yv(farm(h)).toFixed(1)}`).join('');
+    const flexTop = HOURS.map(
+      (h, i) => `${i ? 'L' : 'M'}${X(h).toFixed(1)},${Yv(farm(h) + flex(h)).toFixed(1)}`,
+    ).join('');
+    const farmBack = [...HOURS]
+      .reverse()
+      .map((h) => `L${X(h).toFixed(1)},${Yv(farm(h)).toFixed(1)}`)
+      .join('');
     return { pv: line(pv), farm: line(farm), flex: `${flexTop}${farmBack}Z` };
   }, []);
   const pct = (v: number) => fmtNum(Math.round(v * 100), lang);
@@ -34,13 +40,24 @@ export function DayCurve() {
         {[0, 6, 12, 18, 24].map((h) => (
           <g key={h}>
             <line className="grid" x1={X(h)} x2={X(h)} y1={PAD.t} y2={PAD.t + ih} />
-            <text className="tick" x={X(h)} y={H - 14} textAnchor={h === 0 ? 'start' : h === 24 ? 'end' : 'middle'}>
+            <text
+              className="tick"
+              x={X(h)}
+              y={H - 14}
+              textAnchor={h === 0 ? 'start' : h === 24 ? 'end' : 'middle'}
+            >
               {`${String(h).padStart(2, '0')}:00`}
             </text>
           </g>
         ))}
         <line className="axis" x1={PAD.l} x2={PAD.l + iw} y1={PAD.t + ih} y2={PAD.t + ih} />
-        <rect className="dc-base" x={X(0)} y={Yv(DAY.nodeBase)} width={iw} height={Yv(0) - Yv(DAY.nodeBase)} />
+        <rect
+          className="dc-base"
+          x={X(0)}
+          y={Yv(DAY.nodeBase)}
+          width={iw}
+          height={Yv(0) - Yv(DAY.nodeBase)}
+        />
         <path className="dc-flex" d={paths.flex} />
         <path className="dc-farm" d={paths.farm} />
         <path className="dc-pv" d={paths.pv} />

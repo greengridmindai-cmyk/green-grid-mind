@@ -79,7 +79,8 @@ export default function CabinetViewer({ poster }: { poster: string }) {
       const h = mountCabinet(host.current, { config, theme: 'dark', names, labels });
       handle.current = h;
       off = h.onSelect((id) => setSel(id as CompId | null));
-      if (new URLSearchParams(window.location.search).has('e2e')) (window as unknown as { __ggm: CabinetHandle }).__ggm = h;
+      if (new URLSearchParams(window.location.search).has('e2e'))
+        (window as unknown as { __ggm: CabinetHandle }).__ggm = h;
       setReady(true);
     });
     return () => {
@@ -102,7 +103,10 @@ export default function CabinetViewer({ poster }: { poster: string }) {
     if (c)
       c.setAttribute(
         'aria-label',
-        plain(t.modell.canvas, lang, { config: plain(t.knoten.configs.names[config], lang), view: t.modell.views[view] }),
+        plain(t.modell.canvas, lang, {
+          config: plain(t.knoten.configs.names[config], lang),
+          view: t.modell.views[view],
+        }),
       );
   }, [t, lang, config, view, ready]);
 
@@ -176,7 +180,13 @@ export default function CabinetViewer({ poster }: { poster: string }) {
         <div className="cab-stage" ref={host}>
           {!ready ? (
             <div className="cab-poster">
-              <img src={poster} alt={plain(t.modell.posterAlt, lang)} width={1440} height={900} decoding="async" />
+              <img
+                src={poster}
+                alt={plain(t.modell.posterAlt, lang)}
+                width={1440}
+                height={900}
+                decoding="async"
+              />
               <p className="t-label cab-loading">{webgl ? t.modell.loading : t.modell.noWebgl}</p>
             </div>
           ) : null}
