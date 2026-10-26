@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Manrope;src:url('../../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2') format('woff2-variations');font-weight:200 800}
+@font-face{font-family:JBM;src:url('../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2') format('woff2')}
+html,body{margin:0;background:#070908;color:#ECF0EA}
+.og{position:relative;width:1200px;height:630px;overflow:hidden;font-family:Manrope,sans-serif}
+.og .lines{position:absolute;right:-40px;top:-40px;height:720px;opacity:.9}
+.og .lines rect,.og .lines circle,.og .lines line{fill:none;stroke:rgba(236,240,234,.18);stroke-width:2;vector-effect:non-scaling-stroke}
+.scrim{position:absolute;inset:0;background:linear-gradient(90deg,#070908 0%,rgba(7,9,8,.9) 45%,rgba(7,9,8,0) 80%)}
+.c{position:absolute;left:72px;right:72px;bottom:64px;display:grid;gap:28px}
+.brand{position:absolute;left:72px;top:60px;display:flex;align-items:center;gap:14px;font-weight:600;font-size:26px;letter-spacing:-.01em}
+.label{font-family:JBM,monospace;font-size:18px;letter-spacing:.16em;text-transform:uppercase;color:#9AA39C;background:rgba(236,240,234,.07);padding:10px 16px;justify-self:start}
+h1{margin:0;font-weight:500;font-size:84px;line-height:.98;letter-spacing:-.035em;max-width:13ch}
+.sweep{position:absolute;top:0;bottom:0;left:820px;width:2px;background:linear-gradient(180deg,transparent,#E3A83B 25%,#E3A83B 75%,transparent);opacity:.6}
+.icon{width:180px;height:180px;background:#070908;display:grid;place-items:center}
+</style>
+</head>
+<body>
+<div class="og" id="og">
+  <svg class="lines" viewBox="0 0 1900 2000" preserveAspectRatio="xMaxYMid meet"><rect x="4" y="0" width="792" height="2000"/><rect x="804" y="0" width="792" height="2000"/><rect x="1604" y="0" width="292" height="2000"/><rect x="830" y="36" width="740" height="1846"/><rect x="30" y="36" width="740" height="1846"/><circle cx="1750" cy="1620" r="104"/><circle cx="1750" cy="1220" r="104"/><circle cx="1750" cy="820" r="104"/><circle cx="1750" cy="420" r="104"/><line x1="0" x2="1900" y1="1900" y2="1900"/></svg>
+  <div class="scrim"></div>
+  <div class="sweep"></div>
+  <div class="brand"><svg width="30" height="30" viewBox="0 0 40 40"><rect x="0" y="0" width="16" height="40" fill="currentColor" opacity=".38"/><rect x="17" y="0" width="16" height="40" fill="currentColor"/><rect x="34" y="0" width="6" height="40" fill="#5B9BE6"/></svg>Green Grid Mind</div>
+  <div class="c">
+    <span class="label">[ Pilotphase · Bayern &amp; Baden-Württemberg ]</span>
+    <h1>Das Rechenzentrum, das in eine Scheune passt.</h1>
+  </div>
+</div>
+<div class="icon" id="icon"><svg width="112" height="112" viewBox="0 0 40 40"><rect x="0" y="0" width="16" height="40" fill="#ECF0EA" opacity=".38"/><rect x="17" y="0" width="16" height="40" fill="#ECF0EA"/><rect x="34" y="0" width="6" height="40" fill="#5B9BE6"/></svg></div>
+</body>
+</html>
