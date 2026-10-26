@@ -11,7 +11,7 @@
     "typecheck": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings=0",
     "check-i18n": "node scripts/check-i18n.mjs && eslint src --max-warnings=0 --rule \"react/jsx-no-literals: error\"",
-    "test": "node --test tests/unit/",
+    "test": "node --test \"tests/unit/**/*.test.ts\"",
     "test:e2e": "playwright test",
     "format": "prettier --write ."
   },

@@ -45,7 +45,7 @@ export const TERMS = {
   GbE: { text: 'GbE', src: 'en' },
   U42: { text: '42U', src: 'en' },
   inch19: { text: '19"', src: 'en' },
-  C13C19: { text: 'C19/C13', src: 'en' },
+  C13C19: { text: 'C19 / C13', src: 'en' },
   C19C20: { text: 'C19/C20', src: 'en' },
   CEE: { text: 'CEE', src: 'en' },
   RS485: { text: 'RS-485', src: 'en' },
@@ -91,6 +91,7 @@ export const TERMS = {
   MLAR: { text: 'MLAR', src: 'de' },
   EnWG14a: { text: '§14a EnWG', src: 'de' },
   Richtwerte: { text: 'Richtwerte', src: 'de' },
+  NotAus: { text: 'Not-Aus', src: 'de' },
   Steuerbox: { text: 'Steuerbox §14a', src: 'de' },
   Typ2: { text: 'Typ 2', src: 'de' },
   Typ12: { text: 'Typ 1+2', src: 'de' },
@@ -128,3 +129,26 @@ export function termText(key: TermKey, lang: Lang): string {
 export function isTermKey(k: string): k is TermKey {
   return Object.prototype.hasOwnProperty.call(TERMS, k);
 }
+
+/**
+ * Translation keys (dot paths, `*` matches one segment) whose EN/RU value may equal the German one,
+ * e.g. product names or codes that are identical in every language.
+ */
+export const SAME_IN_ALL_LANGS: string[] = [
+  // product / unit names that are the same word in every language
+  'comp.brick1.name',
+  'comp.brick2.name',
+  'rack.rows.brick1',
+  'rack.rows.brick2',
+  'comp.brick1.specs.cpuram.0',
+  'comp.net.specs.firewall.0',
+  'conn.rows.ems.1',
+  'conn.rows.s1.1',
+  'conn.rows.lcpChiller.1',
+  // German/English cognates
+  'comp.pipes.links.0',
+  'comp.hrx.specs.status.0',
+  'comp.board.specs.details.0',
+  'comp.ems.specs.ctrl.0',
+  'comp.loadbank.specs.form.0',
+];
