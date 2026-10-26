@@ -1,4 +1,4 @@
-/** Site-wide configuration. Every `TODO:` value must be replaced before `npm run build:prod`. */
+/** Site-wide configuration. Every placeholder value (see LAUNCH_CHECKLIST.md) must be replaced before `npm run build:prod`. */
 export const CONTACT_EMAIL = 'TODO:kontakt@domain.tld';
 /** Empty → the contact form falls back to a mailto: link. */
 export const FORM_ENDPOINT = '';

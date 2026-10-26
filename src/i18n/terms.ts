@@ -166,4 +166,7 @@ export const SAME_IN_ALL_LANGS: string[] = [
   'form.roles.investor',
   'form.name',
   'form.org',
+  // legal pages: page name
+  'impressum.title',
+  'datenschutz.sections.1.h',
 ];

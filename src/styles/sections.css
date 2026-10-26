@@ -1102,3 +1102,29 @@
   font-family: var(--f-mono);
   font-size: 13px;
 }
+
+/* ───────── legal / 404 ───────── */
+.legal {
+  padding-top: calc(var(--header-h) + clamp(48px, 8vw, 112px));
+  padding-bottom: var(--sec-y);
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+}
+.legal > * {
+  max-width: 62ch;
+}
+.legal-sec {
+  display: grid;
+  gap: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  width: 100%;
+}
+.legal-banner {
+  border: 1px solid color-mix(in srgb, var(--tag-open) 50%, transparent);
+  color: var(--tag-open);
+  padding: 10px 14px;
+  border-radius: 2px;
+  font-family: var(--f-mono);
+}

@@ -1,16 +1,12 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles/base.css';
-import { I18nProvider } from './i18n/index.ts';
-import { App } from './App.tsx';
+import { mountPage } from './mountPage.tsx';
+import { LegalPage, LEGAL } from './components/LegalPage.tsx';
+import type { PageMeta } from './i18n/index.ts';
+import type { Lang } from './config.ts';
 
-const root = document.getElementById('root');
-if (root) {
-  createRoot(root).render(
-    <StrictMode>
-      <I18nProvider>
-        <App />
-      </I18nProvider>
-    </StrictMode>,
-  );
-}
+const lang = (): Lang => (document.documentElement.lang as Lang) || 'de';
+const meta: PageMeta = {
+  title: () => `${LEGAL[lang()].impressum.title} — {GGMname}`,
+  description: () => LEGAL[lang()].impressum.description,
+};
+
+mountPage(<LegalPage page="impressum" />, meta);

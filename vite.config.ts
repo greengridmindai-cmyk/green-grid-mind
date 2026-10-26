@@ -75,6 +75,7 @@ export default defineConfig({
         main: resolve(root, 'index.html'),
         impressum: resolve(root, 'impressum/index.html'),
         datenschutz: resolve(root, 'datenschutz/index.html'),
+        notFound: resolve(root, '404.html'),
       },
     },
   },

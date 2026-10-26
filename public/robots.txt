@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://greengridmindai-cmyk.github.io/green-grid-mind/sitemap.xml
