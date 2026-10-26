@@ -37,7 +37,9 @@ export function CabinetDetails({ config }: { config: ConfigKey }) {
       }}
     >
       <summary className="t-label">
-        <R s={t.modell.details[id]} />
+        <span>
+          <R s={t.modell.details[id]} />
+        </span>
       </summary>
       <div className="cab-details-body">{body}</div>
     </details>

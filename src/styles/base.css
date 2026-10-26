@@ -3,6 +3,7 @@
 @import './tokens.css';
 @import './layout.css';
 @import './cabinet.css';
+@import './sections.css';
 
 @theme inline {
   --color-night: var(--night);
