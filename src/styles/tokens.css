@@ -1,0 +1,92 @@
+/*
+ * Design tokens — "Agrar-Ingenieurwesen, nachts."
+ * Dark-first. Paper sections are fixed light regardless of OS theme.
+ * Deviations from the brief (contrast, WCAG 2.2 AA ≥ 4.5:1):
+ *   --dim  #6B736D → #7D857F   (4.09:1 → 5.26:1 on --night)
+ *   paper tag "ok"  #2E7D4F → #276A43, "est" #8A6D12 → #735A0E (both < 4.5:1 on --paper-2 before)
+ */
+:root {
+  /* dark stage */
+  --night: #070908;
+  --night-2: #0c0f0d;
+  --night-3: #121613;
+  --ink: #ecf0ea;
+  --muted: #9aa39c;
+  --dim: #7d857f;
+  --line: rgba(236, 240, 234, 0.12);
+  --line-strong: rgba(236, 240, 234, 0.24);
+  --fill: rgba(236, 240, 234, 0.07);
+
+  /* paper sections (light) */
+  --paper: #eeede8;
+  --paper-2: #e5e4de;
+  --paper-ink: #121513;
+  --paper-muted: #5d635e;
+  --paper-line: rgba(18, 21, 19, 0.14);
+  --paper-line-strong: rgba(18, 21, 19, 0.28);
+
+  /* actions */
+  --cta: #ecf0ea;
+  --cta-ink: #070908;
+  --cta-hover: #ffffff;
+  --focus: rgba(236, 240, 234, 0.8);
+  --err: #ef6656;
+
+  /* semantic flows — identical to the 3D model legend; use ONLY for flows/data */
+  --sun: #e3a83b;
+  --cold: #5b9be6;
+  --supply: #5b9be6;
+  --return: #f0a04b;
+  --hot: #ef6656;
+  --power: #d9a33a;
+  --data: #3cc0a2;
+
+  /* epistemic tags (dark) */
+  --tag-ok: #5bc488;
+  --tag-est: #d9b44a;
+  --tag-asm: #9aa39c;
+  --tag-spec: #8fb3e0;
+  --tag-open: #f07a6c;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: clamp(20px, 5vw, 96px);
+  --maxw: 1440px;
+  --sec-y: clamp(96px, 12vw, 176px);
+  --header-h: 72px;
+
+  --f-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  color-scheme: dark;
+}
+
+/* Paper regions remap the same token names, so every component adapts without variants. */
+.paper,
+.paper-2 {
+  --ink: var(--paper-ink);
+  --muted: var(--paper-muted);
+  --dim: var(--paper-muted);
+  --line: var(--paper-line);
+  --line-strong: var(--paper-line-strong);
+  --fill: rgba(18, 21, 19, 0.06);
+  --cta: var(--paper-ink);
+  --cta-ink: var(--paper);
+  --cta-hover: #000000;
+  --focus: var(--paper-ink);
+  --err: #a3352a;
+  --sun: #a8701a;
+  --tag-ok: #276a43;
+  --tag-est: #735a0e;
+  --tag-asm: #5d635e;
+  --tag-spec: #2f5f96;
+  --tag-open: #b03a2e;
+  color-scheme: light;
+  color: var(--ink);
+}
+.paper {
+  background: var(--paper);
+}
+.paper-2 {
+  background: var(--paper-2);
+}
