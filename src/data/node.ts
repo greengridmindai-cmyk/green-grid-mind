@@ -3,6 +3,9 @@
  * Every number on the site is defined here once; copy files reference keys.
  */
 import { dims, n, pair, r, type Q } from '../i18n/format.ts';
+import type { Dict } from '../i18n/de.ts';
+
+type CellKey = keyof Dict['knoten']['configs']['cells'];
 
 export type TagKey = 'ok' | 'est' | 'asm' | 'spec' | 'open';
 export type ConfigKey = 'M' | 'L' | 'P0';
@@ -21,6 +24,12 @@ export const ROW = {
   depth: 1200,
   height: 2000,
 } as const;
+
+/** IT load per configuration (toolbar labels, table). */
+export const IT_LOAD: Record<ConfigKey, Q> = { M: n(10, 'kW'), L: n(15, 'kW'), P0: n(15, 'kW') };
+
+/** Service clearance in front of the row (3D dimension label). */
+export const SERVICE_ZONE = n(1200, 'mm', { cmp: '≥' });
 
 export const HERO_FACTS = {
   itLoad: r(10, 15, 'kW'),
@@ -49,20 +58,20 @@ export const DECISIONS: { id: 'power' | 'air' | 'cooling' | 'reserve' | 'heat'; 
 ];
 
 /** Configuration comparison table (§14.1). Cells are Q values or keys into localized text. */
-export type Cell = { q: Q } | { text: string; q?: Q[] };
+export type Cell = { q: Q } | { text: CellKey; q?: Q[] };
 export interface ConfigRow {
   id: 'use' | 'it' | 'gpu' | 'pit' | 'heat' | 'summer' | 'winter' | 'reserve' | 'fuse' | 'feeder';
   tag?: TagKey;
   cells?: Record<ConfigKey, Cell>;
   /** merged cell spanning all configurations */
-  merged?: { text: string; q?: Q[] };
+  merged?: { text: CellKey; q?: Q[] };
 }
 
 export const CONFIG_ROWS: ConfigRow[] = [
   { id: 'use', cells: { M: { text: 'useM' }, L: { text: 'useL' }, P0: { text: 'useP0' } } },
   {
     id: 'it',
-    cells: { M: { q: n(10, 'kW') }, L: { q: n(15, 'kW') }, P0: { text: 'itP0', q: [n(15, 'kW')] } },
+    cells: { M: { q: IT_LOAD.M }, L: { q: IT_LOAD.L }, P0: { text: 'itP0', q: [IT_LOAD.P0] } },
   },
   {
     id: 'gpu',

@@ -4,7 +4,7 @@
  * Localized names, functions, spec labels/templates and links: ./text.{de,en,ru}.ts
  */
 import { dims, n, pair, r, type Q } from '../../i18n/format.ts';
-import type { TagKey } from '../node.ts';
+import type { ConfigKey, TagKey } from '../node.ts';
 
 export type GroupKey = 'shell' | 'power' | 'it' | 'ext';
 
@@ -241,6 +241,14 @@ export const COMPONENTS: CompData[] = [
   { id: 'uplink', n: 22, g: 'ext', specs: [{ id: 'upload', tag: 'open' }] },
   { id: 'pe', n: 23, g: 'ext', specs: [{ id: 'norm' }] },
 ];
+
+/** Components that exist only in some configurations (legacy `visibleChainIgnoringLayers`). */
+export const AVAILABLE_IN: Partial<Record<CompId, ConfigKey[]>> = {
+  brick2: ['M', 'L'],
+  cpu: ['M', 'L'],
+  loadbank: ['P0'],
+};
+export const isAvailable = (id: CompId, c: ConfigKey) => AVAILABLE_IN[id]?.includes(c) ?? true;
 
 export const COMP_BY_ID: Record<CompId, CompData> = Object.fromEntries(COMPONENTS.map((c) => [c.id, c])) as Record<
   CompId,

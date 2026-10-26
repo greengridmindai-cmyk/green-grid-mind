@@ -2,6 +2,7 @@
 @import './fonts.css';
 @import './tokens.css';
 @import './layout.css';
+@import './cabinet.css';
 
 @theme inline {
   --color-night: var(--night);
@@ -321,8 +322,7 @@
     color: var(--muted);
     font-family: var(--f-mono);
     font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     cursor: pointer;
     transition:
       background-color 0.2s var(--ease),
