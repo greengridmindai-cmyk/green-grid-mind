@@ -36,7 +36,7 @@ export const NODE_SPECS: { id: string; q: Q[]; tag?: TagKey }[] = [
   { id: 'rack', q: [] },
   { id: 'lcp', q: [n(15, '°C')] },
   { id: 'ups', q: [n(20, 'kVA')], tag: 'ok' },
-  { id: 'feeder', q: [n(25, 'mm²'), n(40, 'm', { cmp: '≤' })], tag: 'asm' },
+  { id: 'feeder', q: [n(5), n(25, 'mm²'), n(40, 'm', { cmp: '≤' })], tag: 'asm' },
 ];
 
 /** Five engineering decisions (§5.2 D). */
