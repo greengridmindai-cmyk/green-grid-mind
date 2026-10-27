@@ -11,6 +11,8 @@ export interface RackRow {
   cells: Record<ConfigKey, RackCell>;
   /** GPU rows are rendered as "{n} GPU" */
   gpu?: boolean;
+  /** component of the 3D model this row belongs to (drives availability per configuration) */
+  comp?: 'brick1' | 'brick2' | 'cpu' | 'loadbank';
 }
 
 export const RACK_LAYOUT: RackRow[] = [
@@ -20,10 +22,10 @@ export const RACK_LAYOUT: RackRow[] = [
   { id: 'tor', u: [38, 38], cells: { M: 'y', L: 'y', P0: 'y' } },
   { id: 'fw', u: [37, 37], cells: { M: 'y', L: 'y', P0: 'y' } },
   { id: 'blank', u: [20, 36], cells: { M: 'n', L: 'n', P0: 'n' } },
-  { id: 'load', u: [11, 19], cells: { M: 'n', L: 'n', P0: 'y' } },
-  { id: 'cpu', u: [9, 10], cells: { M: 'y', L: 'y', P0: 'n' } },
-  { id: 'brick2', u: [5, 8], cells: { M: 4, L: 8, P0: 'n' }, gpu: true },
-  { id: 'brick1', u: [1, 4], cells: { M: 8, L: 8, P0: 4 }, gpu: true },
+  { id: 'load', u: [11, 19], cells: { M: 'n', L: 'n', P0: 'y' }, comp: 'loadbank' },
+  { id: 'cpu', u: [9, 10], cells: { M: 'y', L: 'y', P0: 'n' }, comp: 'cpu' },
+  { id: 'brick2', u: [5, 8], cells: { M: 4, L: 8, P0: 'n' }, gpu: true, comp: 'brick2' },
+  { id: 'brick1', u: [1, 4], cells: { M: 8, L: 8, P0: 4 }, gpu: true, comp: 'brick1' },
   { id: 'pdu', u: null, cells: { M: 'y', L: 'y', P0: 'y' } },
 ];
 
@@ -62,3 +64,30 @@ export const SOURCES: { id: string; label?: string; url: string }[] = [
     url: 'https://www.datacenterdynamics.com/en/news/mafi-mushkila-launches-new-server-emulator-for-data-centers/',
   },
 ];
+
+const merge = (ranges: [number, number][]): [number, number][] => {
+  const out: [number, number][] = [];
+  for (const r of [...ranges].sort((a, b) => a[0] - b[0])) {
+    const last = out[out.length - 1];
+    if (last && last[1] + 1 === r[0]) last[1] = r[1];
+    else out.push([r[0], r[1]]);
+  }
+  return out;
+};
+
+/** Row is installed in configuration `c`. */
+export const isInstalled = (row: RackRow, c: ConfigKey) => row.cells[c] !== 'n';
+
+/** U ranges closed with blanking panels in configuration `c` (rows not installed, adjacent ranges merged). */
+export const blankRanges = (c: ConfigKey) =>
+  merge(RACK_LAYOUT.filter((r) => r.u && !isInstalled(r, c)).map((r) => r.u as [number, number]));
+
+/** U ranges with installed equipment in configuration `c` (adjacent ranges merged) — airflow zones. */
+export const installedRanges = (c: ConfigKey) =>
+  merge(RACK_LAYOUT.filter((r) => r.u && isInstalled(r, c)).map((r) => r.u as [number, number]));
+
+/** GPU count of a brick row (an uninstalled brick keeps its full 8-slot geometry, hidden). */
+export const gpuCount = (row: RackRow, c: ConfigKey) =>
+  typeof row.cells[c] === 'number' ? (row.cells[c] as number) : 8;
+
+export const rackRow = (id: RackRow['id']) => RACK_LAYOUT.find((r) => r.id === id) as RackRow;

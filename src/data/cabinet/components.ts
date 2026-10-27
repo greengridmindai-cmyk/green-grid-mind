@@ -5,6 +5,7 @@
  */
 import { dims, n, pair, r, type Q } from '../../i18n/format.ts';
 import type { ConfigKey, TagKey } from '../node.ts';
+import { RACK_LAYOUT } from './rackLayout.ts';
 
 export type GroupKey = 'shell' | 'power' | 'it' | 'ext';
 
@@ -242,13 +243,18 @@ export const COMPONENTS: CompData[] = [
   { id: 'pe', n: 23, g: 'ext', specs: [{ id: 'norm' }] },
 ];
 
-/** Components that exist only in some configurations (legacy `visibleChainIgnoringLayers`). */
-export const AVAILABLE_IN: Partial<Record<CompId, ConfigKey[]>> = {
-  brick2: ['M', 'L'],
-  cpu: ['M', 'L'],
-  loadbank: ['P0'],
-};
-export const isAvailable = (id: CompId, c: ConfigKey) => AVAILABLE_IN[id]?.includes(c) ?? true;
+/**
+ * Configurations in which a component is installed — derived from the rack layout
+ * (src/data/cabinet/rackLayout.ts). Components without a rack row are always present.
+ */
+export const AVAILABLE_IN: Partial<Record<CompId, ConfigKey[]>> = Object.fromEntries(
+  RACK_LAYOUT.filter((r) => r.comp).map((r) => [
+    r.comp,
+    (Object.keys(r.cells) as ConfigKey[]).filter((c) => r.cells[c] !== 'n'),
+  ]),
+);
+export const isAvailable = (id: CompId | string, c: ConfigKey) =>
+  AVAILABLE_IN[id as CompId]?.includes(c) ?? true;
 
 export const COMP_BY_ID: Record<CompId, CompData> = Object.fromEntries(
   COMPONENTS.map((c) => [c.id, c]),

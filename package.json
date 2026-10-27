@@ -13,7 +13,9 @@
     "check-i18n": "node scripts/check-i18n.mjs && eslint src --max-warnings=0 --rule \"react/jsx-no-literals: error\"",
     "test": "node --test \"tests/unit/**/*.test.ts\"",
     "test:e2e": "playwright test",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:model": "playwright test tests/e2e/model.spec.ts",
+    "model:baselines": "UPDATE_BASELINES=1 playwright test tests/e2e/model.spec.ts"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "5.3.0",

@@ -1,6 +1,12 @@
 import { memo } from 'react';
 import type { ConfigKey } from '../../data/node.ts';
 import { ROW } from '../../data/node.ts';
+import { RACK_LAYOUT, gpuCount, isInstalled } from '../../data/cabinet/rackLayout.ts';
+
+/** load modules are 3U each */
+const LOAD_MODULE_U = 3;
+const range = (a: number, b: number, step = 1) =>
+  Array.from({ length: Math.floor((b - a) / step) + 1 }, (_, i) => a + i * step);
 
 /**
  * Front elevation of the GGM-Node row — port of the legacy "рисунок ряда спереди" drawing
@@ -54,8 +60,6 @@ function Brick({ u, gpus }: { u: number; gpus: number }) {
 
 function FrontElevationImpl({ config, variant = 'drawing', labels, className = '', title }: Props) {
   const hero = variant === 'hero';
-  const gpus1 = config === 'P0' ? 4 : 8;
-  const gpus2 = config === 'M' ? 4 : 8;
   const [ecab, rack, lcp] = ROW.sections;
   const x1 = ecab.w;
   const x2 = ecab.w + rack.w;
@@ -96,21 +100,17 @@ function FrontElevationImpl({ config, variant = 'drawing', labels, className = '
       {/* IT rack: door, interior */}
       <rect className="fe-thin" x={830} y={36} width={740} height={1846} />
       <rect className="fe-thin" x={950} y={Y(1975)} width={500} height={1975 - 95} />
-      <Brick u={1} gpus={gpus1} />
-      {config !== 'P0' ? <Brick u={5} gpus={gpus2} /> : null}
-      {config !== 'P0' ? <Unit u={9} n={2} cls="fe-unit" /> : null}
-      {config === 'P0' ? [11, 14, 17].map((u) => <Unit key={u} u={u} n={3} cls="fe-unit fe-load" />) : null}
-      {Array.from({ length: 26 }, (_, i) => i + 11)
-        .filter((u) => config !== 'P0' || u > 19)
-        .map((u) => (
-          <Unit key={u} u={u} n={1} cls="fe-blank" />
-        ))}
-      {config === 'P0' ? [5, 6, 7, 8, 9, 10].map((u) => <Unit key={u} u={u} n={1} cls="fe-blank" />) : null}
-      {[37, 38, 39].map((u) => (
-        <Unit key={u} u={u} n={1} cls="fe-unit" />
-      ))}
-      <Unit u={40} n={2} cls="fe-unit" />
-      <Unit u={42} n={1} cls="fe-unit fe-fire" />
+      {RACK_LAYOUT.filter((r) => r.u).map((r) => {
+        const [a, b] = r.u as [number, number];
+        if (!isInstalled(r, config))
+          return range(a, b).map((u) => <Unit key={`${r.id}-${u}`} u={u} n={1} cls="fe-blank" />);
+        if (r.gpu) return <Brick key={r.id} u={a} gpus={gpuCount(r, config)} />;
+        if (r.id === 'load')
+          return range(a, b, LOAD_MODULE_U).map((u) => (
+            <Unit key={`${r.id}-${u}`} u={u} n={LOAD_MODULE_U} cls="fe-unit fe-load" />
+          ));
+        return <Unit key={r.id} u={a} n={b - a + 1} cls={`fe-unit ${r.id === 'fire' ? 'fe-fire' : ''}`} />;
+      })}
       <line className="fe-line" x1={1537} x2={1537} y1={860} y2={1100} />
       {/* LCP: fans behind the perforated door */}
       <rect className="fe-thin" x={1626} y={36} width={248} height={1846} />

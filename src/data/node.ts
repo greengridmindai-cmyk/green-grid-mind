@@ -4,6 +4,7 @@
  */
 import { dims, n, pair, r, type Q } from '../i18n/format.ts';
 import type { Dict } from '../i18n/de.ts';
+import { MODEL_REVISION } from './cabinet/revision.ts';
 
 type CellKey = keyof Dict['knoten']['configs']['cells'];
 
@@ -11,7 +12,8 @@ export type TagKey = 'ok' | 'est' | 'asm' | 'spec' | 'open';
 export type ConfigKey = 'M' | 'L' | 'P0';
 export const CONFIGS: ConfigKey[] = ['M', 'L', 'P0'];
 
-export const REV = { rev: '0.1', date: '2026-10-26' } as const;
+/** Cabinet design revision — single source: ./cabinet/revision.ts */
+export const REV = MODEL_REVISION;
 
 /** Row of the GGM-Node: section widths (mm), height, depth. */
 export const ROW = {
