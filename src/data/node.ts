@@ -1,17 +1,20 @@
 /**
- * Language-independent facts about the GGM-Node (brief §14.1, §14.2, §5.2 D, §5.3).
+ * Language-independent facts about the GGM-Node (cabinet rev 0.3: values must match
+ * src/components/node3d/cabinetData.js — checked by tests/unit/node3d.test.ts).
+ * (brief §14.1, §14.2, §5.2 D, §5.3).
  * Every number on the site is defined here once; copy files reference keys.
  */
-import { dims, n, pair, r, type Q } from '../i18n/format.ts';
+import { dims, n, r, type Q } from '../i18n/format.ts';
 import type { Dict } from '../i18n/de.ts';
 
 type CellKey = keyof Dict['knoten']['configs']['cells'];
 
-export type TagKey = 'ok' | 'est' | 'asm' | 'spec' | 'open';
+export type TagKey = 'ok' | 'est' | 'asm' | 'spec' | 'open' | 'model' | 'norm';
 export type ConfigKey = 'M' | 'L' | 'P0';
 export const CONFIGS: ConfigKey[] = ['M', 'L', 'P0'];
 
-export const REV = { rev: '0.1', date: '2026-10-26' } as const;
+/** Cabinet revision — equals CABINET.revision in src/components/node3d/cabinetData.js (unit test). */
+export const REV = { rev: '0.3', date: '2026-10-26' } as const;
 
 /** Row of the GGM-Node: section widths (mm), height, depth. */
 export const ROW = {
@@ -24,6 +27,9 @@ export const ROW = {
   depth: 1200,
   height: 2000,
 } as const;
+
+/** GPUs per Brick (#1, #2) — rack layout of cabinetData.js (unit test); drawn in the front elevation. */
+export const GPU_PER_BRICK: Record<ConfigKey, [number, number]> = { M: [8, 4], L: [8, 8], P0: [4, 0] };
 
 /** IT load per configuration (toolbar labels, table). */
 export const IT_LOAD: Record<ConfigKey, Q> = { M: n(10, 'kW'), L: n(15, 'kW'), P0: n(15, 'kW') };
@@ -43,7 +49,7 @@ export const NODE_SPECS: { id: string; q: Q[]; tag?: TagKey }[] = [
   { id: 'row', q: [dims([1900, 1200, 2000], 'mm')] },
   { id: 'it', q: [n(15, 'kW')] },
   { id: 'rack', q: [] },
-  { id: 'lcp', q: [n(15, '°C')] },
+  { id: 'lcp', q: [r(16, 18, '°C')], tag: 'est' },
   { id: 'ups', q: [n(20, 'kVA')], tag: 'ok' },
   { id: 'feeder', q: [n(5), n(25, 'mm²'), n(40, 'm', { cmp: '≤' })], tag: 'asm' },
 ];
@@ -52,7 +58,7 @@ export const NODE_SPECS: { id: string; q: Q[]; tag?: TagKey }[] = [
 export const DECISIONS: { id: 'power' | 'air' | 'cooling' | 'reserve' | 'heat'; value: Q; tag: TagKey }[] = [
   { id: 'power', value: n(60, 's', { cmp: '≤' }), tag: 'spec' },
   { id: 'air', value: n(3000, 'm³/h'), tag: 'est' },
-  { id: 'cooling', value: pair(15, 21, '°C'), tag: 'est' },
+  { id: 'cooling', value: r(16, 18, '°C'), tag: 'est' },
   { id: 'reserve', value: n(20, 'kVA'), tag: 'ok' },
   { id: 'heat', value: r(10, 16, 'kW'), tag: 'est' },
 ];
@@ -104,9 +110,9 @@ export const CONFIG_ROWS: ConfigRow[] = [
     id: 'summer',
     tag: 'est',
     cells: {
-      M: { q: n(14, 'kW', { approx: true }) },
-      L: { q: n(21, 'kW', { approx: true }) },
-      P0: { q: n(21, 'kW', { approx: true }) },
+      M: { q: n(14.5, 'kW', { approx: true }) },
+      L: { q: n(21.7, 'kW', { approx: true }) },
+      P0: { q: n(21.7, 'kW', { approx: true }) },
     },
   },
   {
@@ -114,8 +120,8 @@ export const CONFIG_ROWS: ConfigRow[] = [
     tag: 'est',
     cells: {
       M: { q: n(11.5, 'kW', { approx: true }) },
-      L: { q: n(17, 'kW', { approx: true }) },
-      P0: { q: n(17, 'kW', { approx: true }) },
+      L: { q: n(17.1, 'kW', { approx: true }) },
+      P0: { q: n(17.1, 'kW', { approx: true }) },
     },
   },
   {
@@ -129,9 +135,9 @@ export const CONFIG_ROWS: ConfigRow[] = [
   {
     id: 'fuse',
     cells: {
-      M: { text: 'fuseNH', q: [n(63, 'A')] },
+      M: { text: 'fuseNH', q: [n(80, 'A')] },
       L: { text: 'fuseNH', q: [n(80, 'A')] },
-      P0: { text: 'fuseG', q: [n(80, 'A')] },
+      P0: { text: 'fuseNH', q: [n(80, 'A')] },
     },
   },
   {

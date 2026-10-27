@@ -1,4 +1,16 @@
 dist
 legacy
 node_modules
-src/components/cabinet/cabinetScene.js
+# node3d package v0.4 — kept byte-identical (see src/components/node3d/CLAUDE.md)
+src/components/node3d/*.js
+src/components/node3d/*.md
+src/components/node3d/cabinetData.d.ts
+src/components/node3d/cabinetScene.d.ts
+src/components/node3d/siteScene.d.ts
+scripts/cabinet/demo
+scripts/cabinet/dist
+scripts/cabinet/check-data.mjs
+scripts/cabinet/test-site.mjs
+scripts/cabinet/render-views.mjs
+scripts/cabinet/render-site.mjs
+scripts/cabinet/build-standalone.mjs

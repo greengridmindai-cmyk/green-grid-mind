@@ -11,7 +11,7 @@ import { Hoefe } from './components/sections/Hoefe.tsx';
 import { Unternehmen } from './components/sections/Unternehmen.tsx';
 import { Status } from './components/sections/Status.tsx';
 import { Kontakt } from './components/sections/Kontakt.tsx';
-import { CabinetProvider } from './components/cabinet/CabinetContext.tsx';
+import { NodeProvider } from './components/node3d/NodeContext.tsx';
 
 /** Main page: section composition only. */
 export function App() {
@@ -19,7 +19,7 @@ export function App() {
   useHashAliases();
   useReveal();
   return (
-    <CabinetProvider>
+    <NodeProvider>
       <a className="skip" href="#main">
         {t.a11y.skip}
       </a>
@@ -35,6 +35,6 @@ export function App() {
         <Kontakt index={7} />
       </main>
       <Footer />
-    </CabinetProvider>
+    </NodeProvider>
   );
 }

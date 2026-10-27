@@ -2,7 +2,7 @@
 @import './fonts.css';
 @import './tokens.css';
 @import './layout.css';
-@import './cabinet.css';
+@import './node3d.css';
 @import './sections.css';
 
 @theme inline {
@@ -280,6 +280,12 @@
   }
   .tag-open {
     --tc: var(--tag-open);
+  }
+  .tag-model {
+    --tc: var(--tag-model);
+  }
+  .tag-norm {
+    --tc: var(--tag-norm);
   }
 
   /* ───────── spec row ───────── */

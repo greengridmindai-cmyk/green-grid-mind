@@ -3,12 +3,8 @@ export async function loadSources() {
   const { de } = await import('../src/i18n/de.ts');
   const { en } = await import('../src/i18n/en.ts');
   const { ru } = await import('../src/i18n/ru.ts');
-  const { textDe } = await import('../src/data/cabinet/text.de.ts');
-  const { textEn } = await import('../src/data/cabinet/text.en.ts');
-  const { textRu } = await import('../src/data/cabinet/text.ru.ts');
   const sets = [
     { name: 'dict', de, en, ru },
-    { name: 'cabinet', de: textDe, en: textEn, ru: textRu },
   ];
   try {
     const l = await import('../src/i18n/legal.ts');

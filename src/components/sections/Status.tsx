@@ -5,12 +5,12 @@ import { R, useI18n } from '../../i18n/index.ts';
 import { SectionHead } from '../SectionHead.tsx';
 import { ButtonLink } from '../ui/Button.tsx';
 import { useQVars } from '../ui/QV.tsx';
-import { useCabinet } from '../cabinet/CabinetContext.tsx';
+import { useNode } from '../node3d/NodeContext.tsx';
 
 export function Status({ index }: { index: number }) {
   const { t, lang } = useI18n();
   const vars = useQVars();
-  const { openDetail } = useCabinet();
+  const { openDetail } = useNode();
   const s = t.status;
   const date = (d: { iso: string; precision: 'day' | 'month' }) =>
     d.precision === 'day'

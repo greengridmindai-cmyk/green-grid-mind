@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import type { ConfigKey } from '../../data/node.ts';
-import { ROW } from '../../data/node.ts';
+import { GPU_PER_BRICK, ROW } from '../../data/node.ts';
 
 /**
  * Front elevation of the GGM-Node row — port of the legacy "рисунок ряда спереди" drawing
@@ -54,8 +54,7 @@ function Brick({ u, gpus }: { u: number; gpus: number }) {
 
 function FrontElevationImpl({ config, variant = 'drawing', labels, className = '', title }: Props) {
   const hero = variant === 'hero';
-  const gpus1 = config === 'P0' ? 4 : 8;
-  const gpus2 = config === 'M' ? 4 : 8;
+  const [gpus1, gpus2] = GPU_PER_BRICK[config];
   const [ecab, rack, lcp] = ROW.sections;
   const x1 = ecab.w;
   const x2 = ecab.w + rack.w;

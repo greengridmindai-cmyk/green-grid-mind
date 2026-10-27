@@ -10,10 +10,12 @@
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings=0",
-    "check-i18n": "node scripts/check-i18n.mjs && eslint src --max-warnings=0 --rule \"react/jsx-no-literals: error\"",
+    "check-i18n": "node scripts/check-i18n.mjs && node scripts/cabinet/check-i18n-cabinet.mjs && eslint src --max-warnings=0 --rule \"react/jsx-no-literals: error\"",
     "test": "node --test \"tests/unit/**/*.test.ts\"",
     "test:e2e": "playwright test",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "model:check": "node scripts/cabinet/check-data.mjs && node scripts/cabinet/test-site.mjs",
+    "model:render": "node scripts/cabinet/render-views.mjs docs/qa/cabinet dark && node scripts/cabinet/render-site.mjs docs/qa/site && node scripts/cabinet/render-site.mjs docs/qa/site-phone 390 844"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "5.3.0",

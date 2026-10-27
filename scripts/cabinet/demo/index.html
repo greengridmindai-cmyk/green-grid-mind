@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шкаф GGM-Node</title>
+<link rel="stylesheet" href="./viewer.css">
+<!-- Local preview without a bundler: three is resolved from the CDN. In the website (Vite) `three` comes from npm. -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js",
+  "three/examples/jsm/controls/OrbitControls.js": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js"
+} }
+</script>
+</head>
+<body>
+<div class="wrap" id="app">
+<header class="top">
+  <div>
+    <div class="eyebrow" data-t="eyebrow"></div>
+    <h1 data-t="title"></h1>
+    <p class="sub" data-t="lead"></p>
+  </div>
+  <div class="stamp"><span id="stamp"></span><br><button class="themebtn" id="themeBtn" type="button">тема: авто</button></div>
+</header>
+
+<div class="controls" role="toolbar" aria-label="Управление моделью">
+  <div class="ctl"><span>Конфигурация</span>
+    <div class="seg" id="segConf">
+      <button data-v="M" aria-pressed="false">M · 10 kW</button>
+      <button data-v="L" aria-pressed="true">L · 15 kW</button>
+      <button data-v="P0" aria-pressed="false">Прототип P0</button>
+    </div></div>
+  <div class="ctl"><span>Вид</span>
+    <div class="seg" id="segView">
+      <button data-v="iso" aria-pressed="true">Изометрия</button>
+      <button data-v="front" aria-pressed="false">Спереди</button>
+      <button data-v="rear" aria-pressed="false">Сзади</button>
+      <button data-v="top" aria-pressed="false">Сверху</button>
+      <button data-v="rack" aria-pressed="false">Шкаф</button>
+      <button data-v="system" aria-pressed="false">Система</button>
+      <button data-v="hydro" aria-pressed="false">Гидромодуль</button>
+      <button data-v="fire" aria-pressed="false">Пожарная</button>
+    </div></div>
+  <div class="ctl"><span>Корпуса</span>
+    <div class="seg" id="segShell">
+      <button data-v="glass" aria-pressed="true">Стекло</button>
+      <button data-v="solid" aria-pressed="false">Глухие</button>
+      <button data-v="hidden" aria-pressed="false">Скрыть</button>
+    </div></div>
+  <div class="ctl"><span>Слои</span>
+    <button class="chipbtn" data-l="explode" aria-pressed="false"><i style="background:var(--accent)"></i>Разнести</button>
+    <button class="chipbtn" data-l="air" aria-pressed="true"><i style="background:linear-gradient(90deg,var(--cold),var(--hot))"></i>Воздух</button>
+    <button class="chipbtn" data-l="water" aria-pressed="true"><i style="background:var(--supply)"></i>Вода</button>
+    <button class="chipbtn" data-l="power" aria-pressed="true"><i style="background:var(--power)"></i>Силовые</button>
+    <button class="chipbtn" data-l="signals" aria-pressed="true"><i style="background:var(--signal)"></i>Сигналы</button>
+    <button class="chipbtn" data-l="numbers" aria-pressed="true"><i style="background:var(--ink)"></i>Номера</button>
+    <button class="chipbtn" data-l="fire" aria-pressed="true"><i style="background:var(--fire)"></i>Пожарная</button>
+    <button class="chipbtn" data-l="dims" aria-pressed="false"><i style="background:var(--muted)"></i>Размеры</button>
+    <button class="chipbtn" data-l="scale" aria-pressed="false"><i style="background:var(--muted)"></i>Масштаб</button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="viewer" id="viewer">
+    <div class="hint">тянуть — вращать · колесо — масштаб · правая кнопка — сдвиг</div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <aside class="panel" aria-label="Описание">
+    <div class="pscroll" id="pscroll">
+      <div id="selCard"></div>
+      <div id="confCard"></div>
+      <h3>Компоненты</h3>
+      <ul class="clist" id="clist"></ul>
+    </div>
+  </aside>
+</div>
+
+<div class="sections">
+  <section class="sec"><h2>Принцип</h2><div class="facts" id="principles"></div></section>
+  <section class="sec half"><h2>Раскладка IT-шкафа</h2>
+    <p class="lead">U1 внизу. Тяжёлое оборудование внизу, сеть и обнаружение пожара наверху, свободные U закрыты заглушками.</p>
+    <div class="tscroll"><table id="tblU"></table></div></section>
+  <section class="sec half"><h2>Конфигурации и мощность</h2>
+    <p class="lead">Одна оболочка и один фидер на все варианты. Различаются число GPU и уставка ограничения мощности. Значения расчётные [ОЦ].</p>
+    <div class="tscroll"><table id="tblConf"></table></div></section>
+  <section class="sec" id="firesec"><h2>Пожарная безопасность</h2>
+    <p class="lead">Пять уровней защиты. Главная задача — не дать пожару узла выйти в здание фермы и не дать пожару фермы дойти до узла. Письменное согласие страховщика — условие ввода в эксплуатацию.</p>
+    <div class="layers" id="fireLayers"></div>
+    <h3 style="font-family:var(--f-display);font-size:18px;margin:22px 0 6px">Матрица действий при пожаре</h3>
+    <div class="tscroll"><table class="mx" id="tblMx"></table></div></section>
+  <section class="sec"><h2 id="revTitle">Изменения</h2>
+    <div class="tscroll"><table id="tblRev"></table></div></section>
+  <section class="sec"><h2>Подключения</h2>
+    <div class="tscroll"><table id="tblConn"></table></div></section>
+  <section class="sec half"><h2>Требования к помещению</h2><ul class="plain" id="room"></ul></section>
+  <section class="sec half"><h2>Открытые вопросы</h2><ul class="plain" id="openList"></ul></section>
+</div>
+<div class="foot" id="foot"></div>
+</div>
+<script type="module" src="./viewer.js"></script>
+</body>
+</html>

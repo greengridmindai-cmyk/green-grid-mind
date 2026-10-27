@@ -6,17 +6,22 @@ import { test, expect, type Page } from '@playwright/test';
 import { de } from '../../src/i18n/de.ts';
 import { en } from '../../src/i18n/en.ts';
 import { ru } from '../../src/i18n/ru.ts';
-import { textDe } from '../../src/data/cabinet/text.de.ts';
-import { textEn } from '../../src/data/cabinet/text.en.ts';
-import { textRu } from '../../src/data/cabinet/text.ru.ts';
 import { legalDe, legalEn, legalRu } from '../../src/i18n/legal.ts';
+import { CABINET } from '../../src/components/node3d/cabinetData.js';
+import { SITE } from '../../src/components/node3d/siteData.js';
+import { SEASONS } from '../../src/components/node3d/energyModel.js';
+import { extractText } from '../../src/components/node3d/i18n/text.ts';
+import { de as node3dDe } from '../../src/components/node3d/i18n/de.ts';
+import { en as node3dEn } from '../../src/components/node3d/i18n/en.ts';
 
 type Lang = 'de' | 'en' | 'ru';
 const LANGS: Lang[] = ['de', 'en', 'ru'];
+/** node3d module texts: Russian masters (cabinetData.js / siteData.js) and their translations */
+const node3dRu = extractText(CABINET, SITE, SEASONS);
 const SOURCES: Record<Lang, unknown[]> = {
-  de: [de, textDe, legalDe],
-  en: [en, textEn, legalEn],
-  ru: [ru, textRu, legalRu],
+  de: [de, node3dDe, legalDe],
+  en: [en, node3dEn, legalEn],
+  ru: [ru, node3dRu, legalRu],
 };
 
 function strings(o: unknown): string[] {
@@ -73,12 +78,21 @@ test.describe('i18n completeness', () => {
       await page.waitForTimeout(900);
       texts.push(await page.locator('#mobile-menu').innerText());
       await page.keyboard.press('Escape');
-      // 3D panel with one component
+      // 3D scene: building panel (scene overlays included), then the cabinet with one component
       await page.locator('#modell').scrollIntoViewIfNeeded();
       await page.waitForFunction(() => '__ggm' in window, null, { timeout: 90_000 });
-      await page.locator('.cab-list button[data-id="lcp"]').click();
-      await page.waitForSelector('.cab-card-inner[data-comp="lcp"]');
-      for (const d of await page.locator('.cab-details').all())
+      await page.waitForSelector('.n3d-panel-in');
+      await page.evaluate(() =>
+        (window as unknown as { __ggm: { setLevel(l: string): Promise<void> } }).__ggm.setLevel('building'),
+      );
+      await page.waitForTimeout(600);
+      texts.push(await page.locator('.n3d').innerText());
+      await page.evaluate(() =>
+        (window as unknown as { __ggm: { setLevel(l: string): Promise<void> } }).__ggm.setLevel('cabinet'),
+      );
+      await page.locator('.n3d-list button[data-id="lcp"]').click();
+      await page.waitForSelector('.n3d-card[data-comp="lcp"]');
+      for (const d of await page.locator('.n3d-details').all())
         await d.evaluate((el) => ((el as HTMLDetailsElement).open = true));
       // site check: answer a few questions → result with checklist
       const check = page.locator('#standort-check');
