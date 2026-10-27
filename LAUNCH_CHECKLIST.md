@@ -25,9 +25,11 @@
 - [ ] Confirm the consumer-dispute sentence in the Impressum
 
 ## Engineering review
-- [ ] Coolant flow: water 15/21 °C (ΔT 6 K) but the flow „≈ 45–50 l/min“ is computed for ΔT 5 K — kept from legacy with tag SCHÄTZUNG (3D panel „Vorlauf- und Rücklaufleitung“, connections table)
+- [x] Coolant flow (rev 0.3): ΔT 6 K, PG 40 % → ≈ 42 l/min (L), ≈ 28 l/min (M); operating supply 16–18 °C / return ≈ 22–24 °C
+- [ ] cabinetData.js rev 0.3 still says „15 °C → LCP, ≈ 21 °C“ in components 3 (chiller) and 4 (pipes) and „вода 15 °C“ in the LCP short spec, while legend, principles and open item 6 say 16–18 / 22–24 °C — to be aligned in the next package revision (site copy uses 16–18 / 22–24 °C)
+- [ ] Rows withheld from the website by the claims policy (`npm run check-i18n` lists them): payback of the heat option (component 5, spec row and short spec) — remove in cabinetData.js (the farm name in open item 13 was anonymised on 27.10.2026)
 - [ ] GPU type / count: site uses M = 12, L = 16 × RTX PRO 6000 BSE (tag ANNAHME); the economics workbook uses M = 8 × H100 PCIe
-- [ ] LCP frame size: reference unit 40 kW vs. 15 kW needed (OFFEN)
+- [x] LCP: Rittal LCP Rack CW 3313.230, 10/20/30 kW with 1/2/3 fan modules (rev 0.3); height compatibility with VX IT 2000 mm still open
 - [ ] ≤ 60 s shed time: owner of the acceptance test (tag ZIELWERT until tested)
 
 ## Manual GitHub steps

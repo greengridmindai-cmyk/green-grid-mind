@@ -9,6 +9,7 @@ export type Unit =
   | 'kW'
   | 'kVA'
   | 'kWp'
+  | 'kWh'
   | 'W'
   | 'V'
   | 'A'

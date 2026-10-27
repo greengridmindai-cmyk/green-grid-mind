@@ -40,6 +40,12 @@
   --hot: #ef6656;
   --power: #d9a33a;
   --data: #3cc0a2;
+  /* site scene legend (node3d, siteScene SITE_FLOW) */
+  --farm: #d8cfa8;
+  --grid: #c9cec8;
+  --battery: #b48ce0;
+  --node: #5bc488;
+  --heat: #ef6656;
 
   /* epistemic tags (dark) */
   --tag-ok: #5bc488;
@@ -47,6 +53,8 @@
   --tag-asm: #9aa39c;
   --tag-spec: #8fb3e0;
   --tag-open: #f07a6c;
+  --tag-model: #b48ce0;
+  --tag-norm: #9fc2c9;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -81,6 +89,8 @@
   --tag-asm: #5d635e;
   --tag-spec: #2f5f96;
   --tag-open: #b03a2e;
+  --tag-model: #6b4a96;
+  --tag-norm: #2f6470;
   color-scheme: light;
   color: var(--ink);
 }

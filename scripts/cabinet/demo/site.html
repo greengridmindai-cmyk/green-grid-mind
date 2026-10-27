@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GGM-Node на объекте</title>
+<link rel="stylesheet" href="./site.css">
+<!-- Local preview without a bundler: three is resolved from the CDN. In the website (Vite) `three` comes from npm. -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js",
+  "three/examples/jsm/controls/OrbitControls.js": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js"
+} }
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <div class="eyebrow">[ Green Grid Mind · GGM-Node · от здания до шкафа ]</div>
+    <h1>Где стоит узел и откуда он берёт энергию</h1>
+    <p class="lede">Узел GGM стоит в отдельном помещении существующего здания с солнечными модулями. Хозяйство всегда получает свою энергию первым; гибкая часть вычислений узла переносится в солнечные часы, ночью узел работает от сети.</p>
+  </div>
+  <div class="stamp" id="stamp"></div>
+</header>
+
+<div class="toolbar" role="toolbar" aria-label="Управление сценой">
+  <div class="ctl"><span class="lab">Объект</span><div class="seg" id="segSite"></div></div>
+  <div class="ctl"><span class="lab">Узел</span><div class="seg" id="segCfg"><button data-v="M">M · 10 kW</button><button data-v="L">L · 15 kW</button></div></div>
+  <div class="ctl time"><span class="lab">Время</span>
+    <button class="icon" id="btnPlay" aria-label="Запустить сутки" aria-pressed="false">▶</button>
+    <input type="range" id="hour" min="0" max="23.75" step="0.25" aria-label="Время суток">
+    <output id="hourOut" for="hour">13:00</output>
+    <div class="seg small" id="segSeason"><button data-v="summer">лето</button><button data-v="equinox">весна/осень</button><button data-v="winter">зима</button></div>
+  </div>
+  <div class="ctl right"><button class="btn" id="btnTour">Как это работает →</button><button class="ghost" id="btnHost">Что получает хозяйство →</button></div>
+</div>
+
+<nav class="crumbs" aria-label="Уровень" id="crumbs"></nav>
+
+<div class="stage">
+  <div class="vcol"><div class="viewer" id="viewer">
+    <div class="legend" id="legend"></div>
+    <div class="tourbox" id="tourbox" hidden>
+      <div class="tstep" id="tStep"></div><h3 id="tTitle"></h3><p id="tText"></p>
+      <div class="tnav"><button class="ghost" id="tPrev">← назад</button><button class="ghost" id="tNext">дальше →</button><button class="ghost" id="tStop">выйти (Esc)</button></div>
+    </div>
+  </div><div class="energy" id="energy" aria-live="polite"></div></div>
+  <aside class="panel" aria-live="polite"><div class="pscroll" id="panel"></div></aside>
+</div>
+
+<div class="foot" id="foot"></div>
+</div>
+
+<dialog id="hostDlg" aria-labelledby="hostTitle">
+  <form method="dialog"><button class="close" aria-label="Закрыть">×</button></form>
+  <h2 id="hostTitle"></h2>
+  <div class="cols"><div><h3>Хозяйство получает</h3><ul id="hostGets"></ul></div><div><h3>Что нужно от хозяйства</h3><ul id="hostNeeds"></ul></div></div>
+  <p class="note">Суммы выплат на сайте не публикуются; условия — по договору.</p>
+</dialog>
+<script type="module" src="./site.js"></script>
+</body>
+</html>

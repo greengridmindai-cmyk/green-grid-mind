@@ -134,22 +134,6 @@ export function isTermKey(k: string): k is TermKey {
  * e.g. product names or codes that are identical in every language.
  */
 export const SAME_IN_ALL_LANGS: string[] = [
-  // product / unit names that are the same word in every language
-  'comp.brick1.name',
-  'comp.brick2.name',
-  'rack.rows.brick1',
-  'rack.rows.brick2',
-  'comp.brick1.specs.cpuram.0',
-  'comp.net.specs.firewall.0',
-  'conn.rows.ems.1',
-  'conn.rows.s1.1',
-  'conn.rows.lcpChiller.1',
-  // German/English cognates
-  'comp.pipes.links.0',
-  'comp.hrx.specs.status.0',
-  'comp.board.specs.details.0',
-  'comp.ems.specs.ctrl.0',
-  'comp.loadbank.specs.form.0',
   // main dictionary: page name, codes and cognates
   'nav.impressum',
   'nav.status',
@@ -160,6 +144,7 @@ export const SAME_IN_ALL_LANGS: string[] = [
   'modell.views.rack',
   'modell.views.system',
   'modell.connHead.status',
+  'modell.compHead.status',
   'hoefe.steps.4',
   'check.optional',
   'check.states.bw',

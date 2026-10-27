@@ -4,16 +4,16 @@ import { fmtDate } from '../../i18n/format.ts';
 import { R, plain, useI18n } from '../../i18n/index.ts';
 import { SectionHead } from '../SectionHead.tsx';
 
-const CabinetViewer = lazy(() => import('../cabinet/CabinetViewer.tsx'));
-const POSTER = `${import.meta.env.BASE_URL}media/cabinet-poster.webp`;
+const SiteViewer = lazy(() => import('../node3d/SiteViewer.tsx'));
+const POSTER = `${import.meta.env.BASE_URL}media/site-poster.webp`;
 const EAGER_HASHES = ['#modell', '#cabinet', '#offene-punkte'];
 
 function Poster() {
   const { t, lang } = useI18n();
   return (
     <div className="wrap-wide">
-      <div className="cab-stage cab-stage-static">
-        <div className="cab-poster">
+      <div className="n3d-stage">
+        <div className="n3d-poster">
           <img
             src={POSTER}
             alt={plain(t.modell.posterAlt, lang)}
@@ -22,14 +22,14 @@ function Poster() {
             decoding="async"
             loading="lazy"
           />
-          <p className="t-label cab-loading">{t.modell.loading}</p>
+          <p className="t-label n3d-loading">{t.modell.loading}</p>
         </div>
       </div>
     </div>
   );
 }
 
-/** 3D model section — the Three.js chunk loads lazily when the section is within one viewport. */
+/** 3D scene section (node3d) — the wrapper and the three.js chunk load lazily when the section is within one viewport. */
 export function Modell({ index }: { index: number }) {
   const { t, lang } = useI18n();
   const ref = useRef<HTMLElement>(null);
@@ -70,7 +70,7 @@ export function Modell({ index }: { index: number }) {
       </div>
       {load ? (
         <Suspense fallback={<Poster />}>
-          <CabinetViewer poster={POSTER} />
+          <SiteViewer poster={POSTER} />
         </Suspense>
       ) : (
         <Poster />

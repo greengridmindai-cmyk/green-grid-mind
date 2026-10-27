@@ -39,7 +39,11 @@ export default tseslint.config(
       'node_modules',
       'playwright-report',
       'test-results',
-      'src/components/cabinet/cabinetScene.js',
+      // node3d package (v0.4): engines, data and tools are kept byte-identical to the package
+      'src/components/node3d/*.js',
+      'scripts/cabinet/demo/**',
+      'scripts/cabinet/{check-data,test-site,render-views,render-site,build-standalone}.mjs',
+      'scripts/cabinet/dist/**',
     ],
   },
   js.configs.recommended,

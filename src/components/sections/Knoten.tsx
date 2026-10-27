@@ -9,11 +9,11 @@ import { ButtonLink } from '../ui/Button.tsx';
 import { Segmented } from '../ui/Segmented.tsx';
 import { FrontElevation } from '../charts/FrontElevation.tsx';
 import { ConfigTable } from '../ConfigTable.tsx';
-import { useCabinet } from '../cabinet/CabinetContext.tsx';
+import { useNode } from '../node3d/NodeContext.tsx';
 
 export function Knoten({ index }: { index: number }) {
   const { t, lang } = useI18n();
-  const { config, setConfig } = useCabinet();
+  const { config, setConfig } = useNode();
   const vars = useQVars();
   const k = t.knoten;
   const labels = useMemo(() => {
