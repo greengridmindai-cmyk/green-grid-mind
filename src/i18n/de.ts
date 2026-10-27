@@ -371,7 +371,7 @@ export const de = {
       ems: 'Spezifikation Energiemanagement ({EMS}) Rev 2.0',
       cooling:
         'Kühlkonzept festgelegt: geschlossener Luftkreislauf, wassergekühlter {LCP}, Außen-Chiller mit Freikühlung',
-      p0: 'Prototyp-Schrank {P0} — Rev 0.1; {GPU}-Auswahl offen',
+      p0: 'Prototyp-Schrank {P0} — Rev {rev}; {GPU}-Auswahl offen',
       electrical: 'Elektroschema und Anbindung an die Infrastruktur',
       site: 'Pilotstandort mit {q0} freier Reserve',
       tests: 'Abnahmetests: {q0} {EMS}-Szenarien',

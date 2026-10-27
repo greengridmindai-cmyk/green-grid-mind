@@ -1,4 +1,5 @@
 import { STATUS_STEPS } from '../../data/status.ts';
+import { REV } from '../../data/node.ts';
 import { localeOf } from '../../i18n/format.ts';
 import { fmtDate } from '../../i18n/format.ts';
 import { R, useI18n } from '../../i18n/index.ts';
@@ -32,7 +33,7 @@ export function Status({ index }: { index: number }) {
                 <span className="tl-node" aria-hidden="true" />
                 <span className="sr-only">{`${s.legend[st.state]}: `}</span>
                 <span className="tl-text">
-                  <R s={s.steps[st.id as keyof typeof s.steps]} v={vars(st.q)} />
+                  <R s={s.steps[st.id as keyof typeof s.steps]} v={{ ...vars(st.q), rev: REV.rev }} />
                   {st.date ? <span className="tl-date tnum">{` (${date(st.date)})`}</span> : null}
                 </span>
               </li>

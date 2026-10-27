@@ -22,8 +22,10 @@ Live (after GitHub Pages is enabled, see below): https://greengridmindai-cmyk.gi
 | `npm run typecheck` | `tsc` strict |
 | `npm run lint` | ESLint (zero warnings), incl. `react/jsx-no-literals` |
 | `npm run check-i18n` | Translation completeness + never-translated terms + no literal JSX strings |
-| `npm test` | Unit tests (node:test): `evaluateSite` (15 cases), i18n key parity |
-| `npm run test:e2e` | Playwright: i18n per language, language switch, same-origin network, legacy hash links, video rules, 3D parity |
+| `npm test` | Unit tests (node:test): `evaluateSite`, i18n key parity, 3D model data consistency |
+| `npm run test:e2e` | Playwright: i18n per language, language switch, same-origin network, legacy hash links, video rules, 3D model regression |
+| `npm run test:model` | 3D model only: 18 views vs. approved baselines |
+| `npm run model:baselines` | approve the current 3D model as the new baseline (after an intended change) |
 
 Helper scripts (Playwright, need `npx vite preview --port 4174`):
 `node scripts/render-poster.mjs` (3D poster), `node scripts/render-og.mjs` (OG image + touch icon), `node scripts/qa-screens.mjs` (screenshot report in `docs/qa/screens`).
@@ -70,9 +72,17 @@ Until `public/media/hero.mp4` exists, the hero shows the front-elevation drawing
 
 ## 3D model
 
-`src/components/cabinet/cabinetScene.js` is the legacy viewer ported with byte-identical geometry builders (only ES imports, the `CabinetHandle` API, localized text sprites and render-on-demand changed). It is loaded lazily when the 3D section comes within one viewport. Playwright parity tests compared it with the previous site: 3 configurations × 6 views at 0.00 % pixel difference, and identical spec values for all 23 components (`docs/qa/parity-summary.txt`). The previous single-file site was removed afterwards; to re-run the parity test, restore it with `git show 660c6d9:legacy/index.html > legacy/index.html`.
+Engine: `src/components/cabinet/cabinetScene.js` (renderer, camera, picking, layers, API). Model: one builder per
+section in `src/components/cabinet/model/`, markers/views in `model/layout.js`, and all facts in
+`src/data/cabinet/` (components, rack layout, connections, texts, revision). **How to apply a new revision
+document: [`src/components/cabinet/MODEL.md`](src/components/cabinet/MODEL.md)**; history in
+[`docs/model/CHANGELOG.md`](docs/model/CHANGELOG.md).
 
-Upgrading three.js is a separate task (colour management and lights changed since r155) — see `LAUNCH_CHECKLIST.md`.
+The geometry was ported 1:1 from the previous single-file site (verified at 0.00 % pixel difference,
+`docs/qa/parity-summary.txt`). Regression: `npm run test:model` compares 3 configurations × 6 views with the
+approved images in `tests/e2e/model-baselines/`; `npm run model:baselines` approves an intended change.
+
+Upgrading three.js beyond r128 is a separate task (colour management and lights changed since r155).
 
 ## Deployment
 

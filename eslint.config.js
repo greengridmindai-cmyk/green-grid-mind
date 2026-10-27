@@ -59,6 +59,10 @@ export default tseslint.config(
     },
   },
   {
+    files: ['src/components/cabinet/model/**/*.js'],
+    languageOptions: { globals: globals.browser },
+  },
+  {
     files: ['scripts/**/*.{js,mjs}', 'tests/**/*.ts', '*.config.{js,ts}'],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },

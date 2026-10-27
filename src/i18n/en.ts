@@ -369,7 +369,7 @@ export const en: Dict = {
       ems: 'Energy management ({EMS}) specification Rev 2.0',
       cooling:
         'Cooling concept fixed: closed air loop, water-cooled {LCP}, outdoor chiller with free cooling',
-      p0: 'Prototype cabinet {P0} — Rev 0.1; {GPU} choice open',
+      p0: 'Prototype cabinet {P0} — Rev {rev}; {GPU} choice open',
       electrical: 'Electrical schematic and connection to the infrastructure',
       site: 'Pilot site with {q0} free capacity',
       tests: 'Acceptance tests: {q0} {EMS} scenarios',
